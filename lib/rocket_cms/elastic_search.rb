@@ -1,32 +1,31 @@
 module RocketCMS::ElasticSearch
   extend ActiveSupport::Concern
   included do
-    include Mongoid::Elasticsearch
-    elasticsearch!({
-    index_options: {
-      settings: {
-        index: {
-          analysis: {
-            analyzer: {
-              my_analyzer: {
-                type: "snowball",
-                language: "Russian"
-              }
+    searchkick(
+        language: "Russian",
+        suggest: ["name"],
+        settings: {
+            analysis: {
+                analyzer: {
+                    default_index: {
+                        type: "custom",
+                        tokenizer: "standard",
+                        filter: ["standard", "lowercase", "asciifolding", "searchkick_index_shingle", "searchkick_stemmer", "snowball"]
+
+                        # https://github.com/imotov/elasticsearch-analysis-morphology
+                        # filter: ["standard", "lowercase", "asciifolding", "searchkick_index_shingle", "searchkick_stemmer", "snowball", "russian_morphology", "english_morphology"]
+                    }
+                }
             }
-          }
         }
+    )
+
+    def search_data
+      {
+          _id: _id,
+          name: name,
+          content: SmartExcerpt.strip_tags(content),
       }
-    },
-    index_mapings: {
-      name: {type: 'string', boost: 10, analyzer: 'my_analyzer'},
-      content: {type: 'string', boost: 1, analyzer: 'my_analyzer'},
-    }
-    })
-    def es_index?
-      enabled
-    end
-    def as_indexed_json
-      {name: name, content: SmartExcerpt.strip_tags(content)}
     end
   end
 end

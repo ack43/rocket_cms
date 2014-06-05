@@ -18,8 +18,9 @@ module RocketCMS
         index({enabled: 1, time: 1})
         scope :after_now, -> { where(:time.lt => Time.now) }
 
-        field :excerpt, type: String
-        field :content, type: String
+        field :excerpt,   type: String, localize: true
+        field :name,      type: String, localize: true
+        field :content,   type: String, localize: true
 
         unless RocketCMS.configuration.news_image_styles.nil?
           has_mongoid_attached_file :image, styles: RocketCMS.configuration.news_image_styles

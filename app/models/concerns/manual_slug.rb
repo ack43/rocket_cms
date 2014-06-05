@@ -23,9 +23,9 @@ module ManualSlug
       skip_callback :create, :before, :build_slug
 
       before_validation do
-        self._slugs = self._slugs.map{ |s| s.strip }.select {|s| !s.blank? }
+        self._slugs = self._slugs.map{ |s| s.strip }.reject {|s| s.blank? } if self._slugs
 
-        if self._slugs.empty?
+        if self._slugs.blank?
           self.build_slug
         end
 
@@ -35,4 +35,3 @@ module ManualSlug
   end
 
 end
-

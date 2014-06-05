@@ -28,6 +28,8 @@ require 'rails_admin_settings'
 require 'mongoid-audit'
 require 'history_tracker' # audit model
 
+#require 'rails_admin_mongoid_localize_field'
+
 require 'mongoid_slug'
 
 require 'x-real-ip'

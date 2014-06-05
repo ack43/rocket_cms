@@ -12,3 +12,7 @@
   - content_for :meta do
     = render 'shared/meta', obj: obj
     = render 'shared/og', title: obj.get_og_title, image: obj.og_image
+
+  - content_for :title do
+    - if obj.title
+      %title= obj.title

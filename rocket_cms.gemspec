@@ -49,4 +49,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sitemap_generator'
   spec.add_dependency 'kaminari'
   spec.add_dependency 'addressable'
+
+  spec.add_dependency "rails_admin_mongoid_localize_field", "~> 0.1.2"
 end

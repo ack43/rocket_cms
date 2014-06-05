@@ -14,7 +14,7 @@ module RocketCMS
       included do
         field :regexp, type: String
         field :redirect, type: String
-        field :content, type: String
+        field :content, type: String, localize: true
         field :fullpath, type: String
 
         scope :sorted, -> { order_by([:lft, :asc]) }

@@ -5,11 +5,11 @@ module RocketCMS
       include RocketCMS::Model
 
       included do
-        apply_simple_captcha
+        apply_simple_captcha message: RocketCMS.configuration.contacts_captcha_error_message
 
-        field :name, type: String
-        field :email, type: String
-        field :phone, type: String
+        field :name,    type: String
+        field :email,   type: String
+        field :phone,   type: String
         field :content, type: String
 
         validates_email_format_of :email, unless: 'email.blank?'

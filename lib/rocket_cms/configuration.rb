@@ -22,11 +22,12 @@ module RocketCMS
     attr_accessor :contacts_captcha
     attr_accessor :contacts_fields
     attr_accessor :contacts_message_required
+    attr_accessor :contacts_captcha_error_message
 
     def initialize
       @news_image_styles = {
-        main:  '400x200>',
-        thumb: '200x100>',
+          main:  '400x200>',
+          thumb: '200x100>',
       }
       @news_per_page = 10
       @news_excerpt = 12
@@ -41,6 +42,7 @@ module RocketCMS
       @contacts_captcha = false
       @contacts_fields = {}
       @contacts_message_required = true
+      @contacts_captcha_error_message = "Код проверки введен неверно"
     end
 
     def search_enabled=(val)

@@ -32,7 +32,7 @@ module RsMenu
       begin
         items = ::Menu.find(type.to_s).pages.asc(:lft).to_a
         items.select { |i| i.parent_id.nil? && !i.name.blank? && i.enabled }.each do |item|
-          render_with_subs(items, primary, item)
+          render_with_subs(items, primary, item) if primary
         end
       rescue Exception => exception
         Rails.logger.error exception.message

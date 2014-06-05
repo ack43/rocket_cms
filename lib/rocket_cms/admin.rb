@@ -63,9 +63,7 @@ module RocketCMS
             field :redirect, :string do
               help I18n.t('rs.final_in_menu')
             end
-            field :text_slug do
-              read_only true
-            end
+            field :text_slug
           end
           group :seo, &RocketCMS.seo_config
         end
@@ -79,6 +77,7 @@ module RocketCMS
     def menu_config
       Proc.new {
           navigation_label 'CMS'
+          field :enabled, :toggle
           field :text_slug
           field :name
           RocketCMS.apply_patches self
@@ -101,7 +100,7 @@ module RocketCMS
         RocketCMS.only_patches self, [:show, :list, :edit, :export]
       }
     end
-    
+
     def news_config
       Proc.new {
         navigation_label I18n.t('rs.cms')
