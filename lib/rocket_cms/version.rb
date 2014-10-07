@@ -1,3 +1,3 @@
-module RocketCms
-  VERSION = "0.1.0"
+module RocketCMS
+  VERSION = "0.5.0.rc.5"
 end

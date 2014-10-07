@@ -1,19 +1,11 @@
 module RocketCMS::Controller
   extend ActiveSupport::Concern
   included do
-    protect_from_forgery with: :exception
-
     include RsErrors
     include RsPages
     include RsMenu
-
+    protect_from_forgery with: :exception
     helper_method :page_title
-
-    if Object.const_defined?('CanCan')
-      rescue_from CanCan::AccessDenied do |exception|
-        redirect_to '/', alert: exception.message
-      end
-    end
   end
 
   protected

@@ -17,12 +17,12 @@ module RocketCMS
     
     def seo_config
       Proc.new {
-        active false
+        active true
         label "SEO"
         field :h1, :string
         field :title, :string
-        field :keywords, :string
-        field :description, :string
+        field :keywords, :text
+        field :description, :text
         field :robots, :string
 
         field :og_title, :string
@@ -36,7 +36,7 @@ module RocketCMS
         navigation_label I18n.t('rs.cms')
         list do
           field :enabled,  :toggle
-          field :menus
+          field :menus, :menu
           field :name
           field :fullpath do
             pretty_value do
@@ -49,6 +49,7 @@ module RocketCMS
         end
         edit do
           field :name
+          field :excerpt, :ck_editor
           field :content, :ck_editor
           RocketCMS.apply_patches self
           group :menu do
@@ -92,7 +93,7 @@ module RocketCMS
           read_only true
         end
         field :name
-        field :content
+        field :content, :text
         field :email
         field :phone
 

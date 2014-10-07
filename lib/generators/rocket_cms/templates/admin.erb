@@ -1,5 +1,7 @@
 require 'rails_admin/custom_show_in_app'
 
+RailsAdminSettings.track_history!
+
 RailsAdmin.config do |config|
   ## == Devise ==
   # this is required if not using cancan
@@ -11,9 +13,13 @@ RailsAdmin.config do |config|
   
   ## == Cancan ==
   config.authorize_with :cancan
-
+<% if RocketCMS.mongoid? %>
   ## == MongoidAudit
   config.audit_with :mongoid_audit, 'HistoryTracker'
+<% elsif RocketCMS.active_record? %>
+  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
+<% end %>
+
 
   config.actions do
     dashboard # mandatory
@@ -45,6 +51,7 @@ RailsAdmin.config do |config|
     end
     
     toggle
+    toggle_menu
   end
 
   config.main_app_name = ['<%= Rails.application.class.name.split('::')[0] %>', 'Админка']

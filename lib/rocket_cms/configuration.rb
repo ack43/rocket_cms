@@ -2,6 +2,9 @@ module RocketCMS
   def self.configuration
     @configuration ||= Configuration.new
   end
+  def self.config
+    @configuration ||= Configuration.new
+  end
 
   def self.configure
     yield configuration
@@ -24,6 +27,8 @@ module RocketCMS
     attr_accessor :contacts_message_required
     attr_accessor :contacts_captcha_error_message
 
+    attr_accessor :localize
+
     def initialize
       @news_image_styles = {
           main:  '400x200>',
@@ -42,7 +47,10 @@ module RocketCMS
       @contacts_captcha = false
       @contacts_fields = {}
       @contacts_message_required = true
+
       @contacts_captcha_error_message = "Код проверки введен неверно"
+
+      @localize = false
     end
 
     def search_enabled=(val)
