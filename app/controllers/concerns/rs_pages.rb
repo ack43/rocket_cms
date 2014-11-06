@@ -9,7 +9,7 @@ module RsPages
   def find_page
     @seo_page = find_seo_page request.path
     if !@seo_page.nil? && !@seo_page.redirect.blank?
-      redirect_to @seo_page.redirect
+      redirect_to @seo_page.redirect, status: :moved_permanently
     end
   end
 
@@ -32,7 +32,7 @@ module RsPages
       end
     end
     if !page.nil? && do_redirect
-      redirect_to path
+      redirect_to path, status: :moved_permanently
     end
 
     page

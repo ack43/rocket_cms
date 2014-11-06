@@ -1,11 +1,14 @@
-unless defined?(RocketCMS) && [:active_record, :mongoid].include?(RocketCMS.orm)
+unless defined?(RocketCMS) && RocketCMS.respond_to?(:orm) && [:active_record, :mongoid].include?(RocketCMS.orm)
   puts "please use rocket_cms_mongoid or rocket_cms_activerecord and not rocket_cms directly"
   exit 1
 end
 
 require 'rocket_cms/version'
 require 'devise'
+
 require 'simple_form'
+require 'rocket_cms/simple_form_patch'
+
 require 'glebtv-simple_captcha'
 require 'validates_email_format_of'
 require 'smart_excerpt'
