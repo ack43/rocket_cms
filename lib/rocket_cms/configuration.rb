@@ -29,6 +29,8 @@ module RocketCMS
 
     attr_accessor :localize
 
+    attr_accessor :recreate_contact_message_action
+
     def initialize
       @news_image_styles = {
           main:  '400x200>',
@@ -49,6 +51,7 @@ module RocketCMS
       @contacts_message_required = true
 
       @contacts_captcha_error_message = "Код проверки введен неверно"
+      @recreate_contact_message_action = "new"
 
       @localize = false
     end

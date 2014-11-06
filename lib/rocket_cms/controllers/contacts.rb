@@ -2,6 +2,11 @@ module RocketCMS
   module Controllers
     module Contacts
       extend ActiveSupport::Concern
+      def index
+        @contact_message = ContactMessage.new
+        after_initialize
+      end
+
       def new
         @contact_message = ContactMessage.new
         after_initialize
@@ -20,7 +25,7 @@ module RocketCMS
           redirect_to :contacts_sent
         else
           flash.now[:alert] = @contact_message.errors.full_messages.join("\n")
-          render action: "new"
+          render action: RocketCMS.configuration.recreate_contact_message_action
         end
       end
 
