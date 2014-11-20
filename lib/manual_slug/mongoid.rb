@@ -1,6 +1,6 @@
-module ManualSlug
+module ManualSlug::Mongoid
   extend ActiveSupport::Concern
-  include Mongoid::Slug
+  include ::Mongoid::Slug
 
   def text_slug
     self._slugs.empty? ? '' : self._slugs.last
@@ -33,5 +33,4 @@ module ManualSlug
       end if callback
     end
   end
-
 end

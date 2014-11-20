@@ -3,7 +3,6 @@ module RocketCMS
     module Mongoid
       module Page
         extend ActiveSupport::Concern
-        include ManualSlug
         included do
           field :regexp, type: String
           field :redirect, type: String
@@ -12,6 +11,7 @@ module RocketCMS
           field :fullpath, type: String
           has_and_belongs_to_many :menus, inverse_of: :pages
           acts_as_nested_set
+
           manual_slug :name
 
           scope :sorted, -> { order_by([:lft, :asc]) }

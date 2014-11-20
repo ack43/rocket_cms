@@ -5,6 +5,7 @@ module RocketCMS
       include RocketCMS::Model
       include Enableable
       include RocketCMS.orm_specific('Menu')
+      include ManualSlug
       included do
 
         field :name, type: String, localize: true
@@ -19,6 +20,7 @@ module RocketCMS
 
         has_and_belongs_to_many :pages, inverse_of: :menus
         alias_method :items, :pages
+        manual_slug :name
       end
     end
   end
