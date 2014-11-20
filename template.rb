@@ -61,6 +61,8 @@ group :test do
   gem 'factory_girl_rails'
 end
 
+#{if mongoid then gem "mongo_session_store-rails4" end}
+
 TEXT
 end
 
@@ -97,6 +99,18 @@ create_file 'config/initializers/cookies_serializer.rb' do  <<-TEXT
 Rails.application.config.action_dispatch.cookies_serializer = :marshal
 TEXT
 end
+end
+
+if mongoid
+  remove_file 'config/initializers/session_store.rb'
+  create_file 'config/initializers/session_store.rb' do  <<-TEXT
+# Be sure to restart your server when you modify this file.
+
+#Rails.application.config.session_store :cookie_store, key: '_#{app_name.tableize}_session'
+Rails.application.config.session_store :mongoid_store
+
+  TEXT
+  end
 end
 
 remove_file 'app/controllers/application_controller.rb'
