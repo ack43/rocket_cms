@@ -109,7 +109,7 @@ end
 
 create_file 'config/navigation.rb' do <<-TEXT
 # empty file to please simple_navigation, we are not using it
-# See https://github.com/ack34/rocket_cms/blob/master/app/controllers/concerns/rs_menu.rb
+# See https://github.com/ack43/rocket_cms/blob/master/app/controllers/concerns/rs_menu.rb
 TEXT
 end
 
