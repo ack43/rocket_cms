@@ -14,6 +14,7 @@ module RocketCMS
       end
         
       included do
+
         before_validation do
           self.fullpath = "/pages/#{slug}" if self.fullpath.blank?
         end

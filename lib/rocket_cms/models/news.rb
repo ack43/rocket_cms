@@ -13,6 +13,7 @@ module RocketCMS
       end
 
       included do
+
         validates_presence_of :name, :content
         before_validation do
           self.time = Time.now if self.time.blank?

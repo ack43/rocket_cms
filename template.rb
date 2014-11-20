@@ -19,7 +19,7 @@ gem 'rails', '4.1.6'
 
 gem 'sass', '~> 3.4.4'
 
-#{if mongoid then "gem 'rocket_cms_mongoid'" else "gem 'rocket_cms_activerecord'" end}, '~> 0.5.5'
+#{if mongoid then "gem 'rocket_cms_mongoid', github: 'ack43/rocket_cms', branch: :master" else "gem 'rocket_cms_activerecord', github: 'ack43/rocket_cms', branch: :master" end}
 
 gem 'sass-rails', github: 'rails/sass-rails', ref: '3a9e47db7d769221157c82229fc1bade55b580f0'
 gem 'compass-rails', '~> 2.0.0'
@@ -106,7 +106,7 @@ if mongoid
   create_file 'config/initializers/session_store.rb' do  <<-TEXT
 # Be sure to restart your server when you modify this file.
 
-#Rails.application.config.session_store :cookie_store, key: '_#{app_name.tableize}_session'
+#Rails.application.config.session_store :cookie_store, key: '_#{app_name.tableize.singularize}_session'
 Rails.application.config.session_store :mongoid_store
 
   TEXT

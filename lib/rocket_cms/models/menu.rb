@@ -6,6 +6,7 @@ module RocketCMS
       include Enableable
       include RocketCMS.orm_specific('Menu')
       include ManualSlug
+
       included do
 
         field :name, type: String, localize: true

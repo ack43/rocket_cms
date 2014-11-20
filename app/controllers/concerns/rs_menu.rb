@@ -38,7 +38,7 @@ module RsMenu
         Rails.logger.error exception.message
         Rails.logger.error exception.backtrace.join("\n")
         capture_exception(exception) if respond_to?(:capture_exception)
-        items
+        items || []
       end
     end
   end
