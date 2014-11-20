@@ -61,7 +61,7 @@ group :test do
   gem 'factory_girl_rails'
 end
 
-#{if mongoid then gem "mongo_session_store-rails4" else "" end}
+#{if mongoid then "gem 'mongo_session_store-rails4'" else "" end}
 
 TEXT
 end
