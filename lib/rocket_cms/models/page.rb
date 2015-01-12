@@ -38,7 +38,7 @@ module RocketCMS
             ''
           else
             content.gsub(/\{\{(.*?)\}\}/) do
-              Settings.get($1).val
+              Settings ? Settings.get($1).val : "" #temp
             end
           end
         else

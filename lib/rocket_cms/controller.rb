@@ -12,7 +12,7 @@ module RocketCMS::Controller
   
     def page_title
       if @seo_page.nil?
-        Settings.default_title
+        Settings ? Settings.default_title : "" #temp
       else
         @seo_page.page_title
       end
