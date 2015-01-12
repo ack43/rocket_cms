@@ -1,6 +1,8 @@
 require 'rails_admin/custom_show_in_app'
 
+<% if RocketCMS.mongoid? %>
 RailsAdminSettings.track_history!
+<% end %>
 
 RailsAdmin.config do |config|
   ## == Devise ==
