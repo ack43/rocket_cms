@@ -18,11 +18,6 @@ require 'rails_admin_nested_set'
 require 'rails_admin_toggleable'
 require 'rails_admin_settings'
 
-require 'mongoid-audit'
-# require 'history_tracker'
-
-require 'mongoid_slug'
-
 require 'x-real-ip'
 
 require 'glebtv-ckeditor'
