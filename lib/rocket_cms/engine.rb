@@ -6,10 +6,15 @@ module RocketCMS
 
     initializer "rocket_cms.email_defaults" do
       # Write default email settings to DB so they can be changed.
-      if Settings and Settings.table_exists?
-        Settings.default_email_from(default: 'noreply@gpk-holding.ru')
-        Settings.form_email(default: 'admin@gpk-holding.ru')
-        Settings.email_topic(default: 'с сайта')
+
+      #temp
+      begin
+        if Settings.table_exists?
+          Settings.default_email_from(default: 'noreply@gpk-holding.ru')
+          Settings.form_email(default: 'admin@gpk-holding.ru')
+          Settings.email_topic(default: 'с сайта')
+        end
+      rescue
       end
     end
 
