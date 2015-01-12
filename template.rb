@@ -192,7 +192,7 @@ end
 
 unless mongoid
   generate "rocket_cms:migration"
-  generate "rails_admin_settings:migration"
+  # generate "rails_admin_settings:migration"
 end
 
 generate "rocket_cms:admin"

@@ -4,6 +4,7 @@ require 'paper_trail'
 require 'friendly_id'
 require 'foreigner'
 require 'validates_lengths_from_database'
+require 'pg_search'
 
 module RocketCMS
   def self.orm

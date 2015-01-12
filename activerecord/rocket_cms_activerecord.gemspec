@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'friendly_id'
   spec.add_dependency "validates_lengths_from_database"
   spec.add_dependency 'foreigner'
+  spec.add_dependency 'pg_search'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'

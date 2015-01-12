@@ -13,11 +13,11 @@ any time!**
 
 Add this line to your application's Gemfile:
 
-    gem 'rocket_cms_mongoid'
+    gem 'rocket_cms_mongoid', github: "ack43/rocket_cms", branch: :master
 
 or:
 
-    gem 'rocket_cms_activerecord'
+    gem 'rocket_cms_activerecord', github: "ack43/rocket_cms", branch: :master
 
 *Only PostgreSQL is tested or supported for AR. Others will probably work, but untested.*
 
