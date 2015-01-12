@@ -5,11 +5,11 @@ require 'rocket_cms/version'
 Gem::Specification.new do |spec|
   spec.name          = 'rocket_cms'
   spec.version       = RocketCMS::VERSION
-  spec.authors       = ['glebtv']
-  spec.email         = ['glebtv@gmail.com']
+  spec.authors       = ['glebtv', 'Alexander Kiseliev']
+  spec.email         = ['glebtv@gmail.com', "i43ack@gmail.com"]
   spec.description   = %q{RocketCMS}
   spec.summary       = %q{Please DO NOT use this gem directly, use rocket_cms_mongoid or rocket_cms_activerecord instead!}
-  spec.homepage      = 'https://github.com/rs-pro/rocket_cms'
+  spec.homepage      = 'https://github.com/ack43/rocket_cms'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/).reject {|f| f.start_with?('mongoid') || f.start_with?('activerecord') }
@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
   
-  spec.add_dependency 'rails', "~> 4.1.6"
+  spec.add_dependency 'rails', '>= 4.1.0', '< 5.0'
 
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'simple_form'
@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
   spec.add_dependency 'glebtv-ckeditor'
-  spec.add_dependency 'rails_admin_settings', '~> 0.9.0.pre.4'
+  spec.add_dependency 'rails_admin_settings', '~> 0.9.0'
   spec.add_dependency 'geocoder'
   spec.add_dependency 'simple-navigation'
   spec.add_dependency 'sitemap_generator'

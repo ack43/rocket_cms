@@ -16,7 +16,7 @@ ru:
       show_all: "Показать все"
       add_filter: "Добавить фильтр..."
       bulk_menu_title: "Выбранные элементы..."
-      remove: "Убрfnm"
+      remove: "Убрать"
       add_new: "Добавить новый"
       chosen: "Выбрать %{name}"
       chose_all: "Выбрать все"

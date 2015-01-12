@@ -9,11 +9,11 @@ require 'rocket_cms/version'
 Gem::Specification.new do |spec|
   spec.name          = 'rocket_cms_mongoid'
   spec.version       = RocketCMS::VERSION
-  spec.authors       = ['glebtv']
-  spec.email         = ['glebtv@gmail.com']
+  spec.authors       = ['glebtv', 'Alexander Kiseliev']
+  spec.email         = ['glebtv@gmail.com', "i43ack@gmail.com"]
   spec.description   = %q{RocketCMS - Mongoid metapackage}
   spec.summary       = %q{}
-  spec.homepage      = 'https://github.com/rs-pro/rocket_cms'
+  spec.homepage      = 'https://github.com/ack43/rocket_cms'
   spec.license       = 'MIT'
 
   spec.files         = %w(lib/rocket_cms_mongoid.rb)
@@ -24,8 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
   
-  spec.add_dependency 'rails', '~> 4.1.6'
-
   spec.add_dependency 'mongoid', '~> 4.0.0'
   spec.add_dependency 'rocket_cms', RocketCMS::VERSION
 
