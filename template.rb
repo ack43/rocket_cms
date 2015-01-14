@@ -187,12 +187,12 @@ end
 if mongoid
   generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
 else
-  generate "ckeditor:install", "--orm-active_record", "--backend=paperclip"
+  generate "ckeditor:install", "--orm=active_record", "--backend=paperclip"
 end
 
 unless mongoid
   generate "rocket_cms:migration"
-  # generate "rails_admin_settings:migration"
+  generate "rails_admin_settings:migration"
 end
 
 generate "rocket_cms:admin"

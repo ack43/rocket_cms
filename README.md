@@ -31,7 +31,7 @@ Or install it yourself as:
 
 For activerecord, generate migrations and run them
 
-    #rails g rails_admin_settings:migration #temporary (need fix)
+    rails g rails_admin_settings:migration
     rails g rocket_cms:migration
     rake db:migrate
 
