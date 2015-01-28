@@ -30,9 +30,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'glebtv-mongoid_nested_set'
   spec.add_dependency 'glebtv-mongoid-paperclip'
   spec.add_dependency 'mongoid-audit', '~> 1.0.0'
-  spec.add_dependency 'mongoid_slug'
+  spec.add_dependency 'mongoid-slug'
 
   spec.add_dependency 'mongo_session_store-rails4'
-  # spec.add_dependency 'rails_admin_settings', '~> 0.9.0'
+  spec.add_dependency 'rails_admin_settings', '~> 0.9.0'
 end
 

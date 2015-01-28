@@ -6,6 +6,7 @@ module RocketCMS
       include Enableable
       include Seoable
       include ManualSlug
+      include SitemapData
 
       include RocketCMS.orm_specific('Page')
 

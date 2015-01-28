@@ -68,6 +68,7 @@ module RocketCMS
             field :text_slug
           end
           group :seo, &RocketCMS.seo_config
+          group :sitemap_data, &RocketCMS.sitemap_data_config
         end
         RocketCMS.only_patches self, [:show, :export]
         nested_set({
@@ -120,9 +121,24 @@ module RocketCMS
           field :content, :ck_editor
           RocketCMS.apply_patches self
           group :seo, &RocketCMS.seo_config
+          group :sitemap_data, &RocketCMS.sitemap_data_config
         end
 
         RocketCMS.only_patches self, [:show, :list, :export]
+      }
+    end
+
+    def sitemap_data_config(is_active = false)
+      Proc.new {
+        active is_active
+        label I18n.t('rs.sitemap_data')
+        field :sitemap_lastmod
+        field :sitemap_changefreq, :enum do
+          enum do
+            SitemapData::SITEMAP_CHANGEFREQ_ARRAY
+          end
+        end
+        field :sitemap_priority
       }
     end
   end
