@@ -201,6 +201,78 @@ if mongoid
 gsub_file 'app/models/user.rb', '# field :failed_attempts', 'field :failed_attempts'
 gsub_file 'app/models/user.rb', '# field :unlock_token', 'field :unlock_token'
 gsub_file 'app/models/user.rb', '# field :locked_at', 'field :locked_at'
+
+inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
+  field :name,    type: String
+  field :login,   type: String
+  field :roles,   type: Array
+
+  before_save do
+    self.roles.reject! { |r| r.blank? }
+  end
+
+  AVAILABLE_ROLES = ["admin", "manager", "client"]
+
+  AVAILABLE_ROLES.each do |r|
+    class_eval <<-EVAL
+      def #{r}?
+        self.roles.include?("#{r}")
+      end
+    EVAL
+  end
+
+  rails_admin do
+    list do
+      field :email
+      field :name
+      field :login
+      field :roles do
+        pretty_value do
+          bindings[:view].content_tag(:p, bindings[:object].roles.join(", "))
+        end
+      end
+    end
+
+    edit do
+      field :email, :string do
+        visible do
+          bindings[:view].current_user.admin?
+        end
+      end
+      field :name, :string
+      field :login, :string do
+        visible do
+          bindings[:view].current_user.admin?
+        end
+      end
+      field :roles, :enum do
+        enum do
+          AVAILABLE_ROLES
+        end
+
+        multiple do
+          true
+        end
+
+        visible do
+          bindings[:view].current_user.admin?
+        end
+      end
+
+      field :password do
+        visible do
+          bindings[:view].current_user.admin? or bindings[:view].current_user == bindings[:object]
+        end
+      end
+      field :password_confirmation do
+        visible do
+          bindings[:view].current_user.admin? or bindings[:view].current_user == bindings[:object]
+        end
+      end
+    end
+  end
+TEXT
+end
 end
 
 if mongoid
@@ -343,7 +415,7 @@ end
 remove_file 'public/robots.txt'
 create_file 'public/robots.txt' do <<-TEXT
 User-Agent: *
-Disallow: /
+Disallow: /admin
 Sitemap: /sitemap.xml.gz
 TEXT
 end

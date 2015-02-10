@@ -132,6 +132,7 @@ module RocketCMS
       Proc.new {
         active is_active
         label I18n.t('rs.sitemap_data')
+        field :sitemap_show
         field :sitemap_lastmod
         field :sitemap_changefreq, :enum do
           enum do

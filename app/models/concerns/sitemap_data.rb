@@ -5,8 +5,9 @@ module SitemapData
 
   included do
     if RocketCMS.mongoid?
+      field :sitemap_show,        type: Boolean, default: true
       field :sitemap_lastmod,     type: DateTime
-      field :sitemap_changefreq,  type: String, default: 'daily'
+      field :sitemap_changefreq,  type: String,   default: 'daily'
       field :sitemap_priority,    type: Float
     elsif RocketCMS.active_record?
     end
