@@ -48,6 +48,7 @@ ru:
         email: E-mail
         name: ФИО
         login: Логин
+        roles: "Права доступа"
         old_password: Текущий пароль
         password: Пароль
         password_confirmation: Подтвердите пароль
