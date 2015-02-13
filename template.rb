@@ -19,7 +19,7 @@ gem 'rails', '4.2.0'
 
 # gem 'sass'
 
-#{if mongoid then "gem 'rocket_cms_mongoid', github: 'ack43/rocket_cms', branch: :master" else "gem 'rocket_cms_activerecord', github: 'ack43/rocket_cms', branch: :master" end}
+#{if mongoid then "gem 'ack_rocket_cms_mongoid'" else "gem 'ack_rocket_cms_activerecord'" end}
 
 gem 'devise'
 

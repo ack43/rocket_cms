@@ -3,12 +3,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'rocket_cms/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'rocket_cms'
+  spec.name          = 'ack_rocket_cms'
   spec.version       = RocketCMS::VERSION
   spec.authors       = ['glebtv', 'Alexander Kiseliev']
   spec.email         = ['glebtv@gmail.com', "i43ack@gmail.com"]
-  spec.description   = %q{RocketCMS}
-  spec.summary       = %q{Please DO NOT use this gem directly, use rocket_cms_mongoid or rocket_cms_activerecord instead!}
+  spec.description   = %q{RocketCMS fork}
+  spec.summary       = %q{Please DO NOT use this gem directly, use ack_rocket_cms_mongoid or ack_rocket_cms_activerecord instead!}
   spec.homepage      = 'https://github.com/ack43/rocket_cms'
   spec.license       = 'MIT'
 
