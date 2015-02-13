@@ -36,6 +36,8 @@ module RocketCMS
         RocketCMS.apply_patches self
         navigation_label I18n.t('rs.cms')
         list do
+          scopes [:sorted, :enabled, nil]
+
           field :enabled,  :toggle
           field :menus, :menu
           field :name
@@ -80,6 +82,7 @@ module RocketCMS
     def menu_config
       Proc.new {
           navigation_label 'CMS'
+
           field :enabled, :toggle
           field :text_slug
           field :name
@@ -107,6 +110,9 @@ module RocketCMS
     def news_config
       Proc.new {
         navigation_label I18n.t('rs.cms')
+        list do
+          scopes [:by_date, :enabled, nil]
+        end
 
         field :enabled, :toggle
         field :time

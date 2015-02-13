@@ -83,3 +83,10 @@ ru:
       messages:
         invalid_email_address: "^Неверный e-mail"
 
+  admin:
+    scopes:
+      by_date: "По времени"
+      sorted: "Сортированные"
+      enabled: "Доступные"
+      _all: "Все"
+

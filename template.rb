@@ -70,7 +70,7 @@ gem 'sprockets'
 
 
 gem 'sitemap_generator'
-gem 'rails_admin_sitemap', github: 'ack43/rails_admin_sitemap'
+gem 'rails_admin_sitemap'
 
 gem 'uglifier'
 
@@ -78,7 +78,7 @@ group :production do
   gem "god"
 end
 
-gem "rails_admin_sort_embedded", github: "ack43/rails_admin_sort_embedded"
+gem "rails_admin_sort_embedded"
 
 TEXT
 end
@@ -390,8 +390,9 @@ body.rails_admin .form-horizontal
     width: 60%
 
 body.rails_admin .modal
-  margin-left: -495px !important
-  width: 990px !important
+  margin: 0 auto !important
+  .modal-dialog
+    width: 990px !important
   
 input[type=checkbox]
   width: 30px !important
