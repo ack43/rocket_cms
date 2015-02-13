@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/ack43/rocket_cms'
   spec.license       = 'MIT'
 
-  spec.files         = %w(lib/ack_rocket_cms_mongoid.rb)
+  spec.files         = %w(lib/ack_rocket_cms_mongoid.rb lib/rocket_cms_mongoid.rb)
   spec.executables   = []
   spec.test_files    = []
   spec.require_paths = ['lib']
