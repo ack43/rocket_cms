@@ -203,6 +203,7 @@ gsub_file 'app/models/user.rb', '# field :unlock_token', 'field :unlock_token'
 gsub_file 'app/models/user.rb', '# field :locked_at', 'field :locked_at'
 
 inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
+
   field :name,    type: String
   field :login,   type: String
   field :roles,   type: Array
