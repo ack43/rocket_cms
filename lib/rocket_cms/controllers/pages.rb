@@ -10,6 +10,7 @@ module RocketCMS
         end
         if @seo_page.nil?
           render_404
+          return
         end
       end
     end

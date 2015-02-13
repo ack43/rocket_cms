@@ -23,7 +23,7 @@ gem 'rails', '4.2.0'
 
 gem 'devise'
 
-gem 'sass-rails', github: 'rails/sass-rails', ref: '3a9e47db7d769221157c82229fc1bade55b580f0'
+gem 'sass-rails'
 gem 'compass-rails'
 gem 'compass'
 
@@ -363,31 +363,58 @@ TEXT
 end
 
 create_file 'app/assets/stylesheets/rails_admin/custom/theming.css.sass' do <<-TEXT
-body.rails_admin .form-horizontal textarea
-  width: 563px
-  height: 120px
+.navbar-brand
+  margin-left: 0 !important
+
+.input-small
+  width: 150px
+
+input[type=text]
+  width: 380px !important
+input.ra-filtering-select-input[type=text]
+  width: 180px !important
+input.hasDatepicker
+  width: 180px !important
+
+.sidebar-nav
+  a
+    padding: 6px 10px !important
+  .dropdown-header
+    padding: 10px 0px 3px 9px
+
+.label-important
+  background-color: #d9534f
+.alert-notice
+  color: #5bc0de
 
 .page-header
-  display: none !important
+  display: none
+.breadcrumb
+  margin-top: 20px
 
-body > .container-fluid > .row-fluid > .span3
-  max-width: 140px
+.control-group
+  clear: both
 
-@media screen and (min-width: 910px)
-  body > .container-fluid > .row-fluid > .span9
-    width: 81.5%
+.container-fluid
+  padding-left: 0
+  > .row
+    margin: 0
 
-@media screen and (min-width: 1005px)
-  body > .container-fluid > .row-fluid > .span9
-    width: 83%
+.last.links
+  a
+    display: inline-block
+    padding: 3px
+    font-size: 20px
 
-@media screen and (min-width: 1150px)
-  body > .container-fluid > .row-fluid > .span9
-    width: 85%
+.remove_nested_fields
+  display: block !important
+  z-index: 5
+  right: 0
+  left: auto
 
-body.rails_admin .form-horizontal
-  .string_type input, .integer_type input, .text_type textarea
-    width: 60%
+.modal
+  width: 800px !important
+
 
 body.rails_admin .modal
   margin: 0 auto !important
@@ -410,6 +437,16 @@ body.rails_admin
 
     &:first-child
       border-top: none
+
+.bank_row .logo_field, #edit_bank img
+  background: #ccc !important
+
+.ui-menu-item
+  border: 1px solid transparent
+
+.content > .alert
+  margin-top: 20px
+
 TEXT
 end
 
