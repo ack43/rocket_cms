@@ -206,7 +206,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
 
   field :name,    type: String
   field :login,   type: String
-  field :roles,   type: Array
+  field :roles,   type: Array, default: []
 
   before_save do
     self.roles.reject! { |r| r.blank? }
@@ -342,7 +342,7 @@ admin_pw = SecureRandom.urlsafe_base64(6)
 create_file 'db/seeds.rb' do <<-TEXT
 admin_pw = "#{admin_pw}"
 User.destroy_all
-User.create!(email: 'admin@#{app_name.dasherize.downcase}.ru', password: admin_pw, password_confirmation: admin_pw)
+User.create!(email: 'admin@#{app_name.dasherize.downcase}.ru', password: admin_pw, password_confirmation: admin_pw, roles: ["admin"])
 TEXT
 end
 

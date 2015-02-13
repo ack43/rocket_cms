@@ -2,7 +2,7 @@
 
 rails_admin + mongoid/activerecord + elasticsearch CMS
 
-Very opinionated and tuned for our needs.
+Very opinionated and tuned for my needs.
 
 Sorry, no documentation or examples are availiable yet. Stay tuned
 
@@ -13,13 +13,13 @@ any time!**
 
 Add this line to your application's Gemfile:
 
-    gem 'rocket_cms_mongoid', github: "ack43/rocket_cms", branch: :master
+    gem 'ack_rocket_cms_mongoid'
 
 or:
 
-    gem 'rocket_cms_activerecord', github: "ack43/rocket_cms", branch: :master
+    gem 'ack_rocket_cms_activerecord'
 
-*Only PostgreSQL is tested or supported for AR. Others will probably work, but untested.*
+*Only PostgreSQL is tested or supported for AR(from root repo). Others will probably work, but untested.*
 
 And then execute:
 
@@ -60,7 +60,7 @@ generator creates a new RVM gemset, so after cd'ing to app dir, you should run `
 
 ### Documentation
 
-It's basically Mongoid + Rails Admin + some of our common models and controllers, capistrano config, etc.
+It's basically Mongoid + Rails Admin + some of my common models and controllers, capistrano config (from root repo), etc.
 
 See their documentation for more info
 

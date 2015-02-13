@@ -46,6 +46,8 @@ ru:
     attributes:
       user:
         email: E-mail
+        name: ФИО
+        login: Логин
         old_password: Текущий пароль
         password: Пароль
         password_confirmation: Подтвердите пароль
