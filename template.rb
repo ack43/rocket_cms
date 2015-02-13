@@ -216,8 +216,8 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
 
   AVAILABLE_ROLES.each do |r|
     class_eval <<-EVAL
-      def #{r}?
-        self.roles.include?("#{r}")
+      def \#{r}?
+        self.roles.include?("\#{r}")
       end
     EVAL
   end
