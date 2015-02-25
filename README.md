@@ -27,7 +27,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install rocket_cms
+    $ gem install ack_rocket_cms
 
 For activerecord, generate migrations and run them
 

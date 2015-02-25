@@ -21,7 +21,6 @@ module RocketCMS
 
         has_and_belongs_to_many :pages, inverse_of: :menus
         alias_method :items, :pages
-        manual_slug :name
       end
     end
   end

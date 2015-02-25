@@ -13,6 +13,11 @@ module RocketCMS
 
       def show
         @news = model.after_now.find(params[:id])
+
+        if @news and @news.text_slug != params[:id]
+          redirect_to @news, status_code: 301
+          return true
+        end
       end
       
       private

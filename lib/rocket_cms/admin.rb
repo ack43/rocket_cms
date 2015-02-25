@@ -121,6 +121,19 @@ module RocketCMS
           field :image
         end
         field :excerpt
+        field :slugs, :enum do
+          enum_method do
+            :slugs
+          end
+          visible do
+            bindings[:view].current_user.admin?
+          end
+          multiple do
+            true
+          end
+        end
+        field :text_slug
+
         RocketCMS.apply_patches self
 
         edit do
