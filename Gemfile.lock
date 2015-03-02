@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ack_rocket_cms (0.7.2.3.1)
+    ack_rocket_cms (0.7.2.3.2)
       addressable
       coffee-rails
       devise
@@ -76,7 +76,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1)
-    connection_pool (2.1.1)
+    connection_pool (2.1.2)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
