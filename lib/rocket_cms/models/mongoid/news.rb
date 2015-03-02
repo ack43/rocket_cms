@@ -3,7 +3,6 @@ module RocketCMS
     module Mongoid
       module News
         extend ActiveSupport::Concern
-        include FilenameToSlug
         unless RocketCMS.configuration.news_image_styles.nil?
           include ::Mongoid::Paperclip
         end
