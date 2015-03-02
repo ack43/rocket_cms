@@ -237,13 +237,13 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
     edit do
       field :email, :string do
         visible do
-          bindings[:view].current_user.admin?
+          bindings[:controller].current_user.admin?
         end
       end
       field :name, :string
       field :login, :string do
         visible do
-          bindings[:view].current_user.admin?
+          bindings[:controller].current_user.admin?
         end
       end
       field :roles, :enum do
@@ -256,18 +256,18 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
         end
 
         visible do
-          bindings[:view].current_user.admin?
+          bindings[:controller].current_user.admin?
         end
       end
 
       field :password do
         visible do
-          bindings[:view].current_user.admin? or bindings[:view].current_user == bindings[:object]
+          bindings[:controller].current_user.admin? or bindings[:controller].current_user == bindings[:object]
         end
       end
       field :password_confirmation do
         visible do
-          bindings[:view].current_user.admin? or bindings[:view].current_user == bindings[:object]
+          bindings[:controller].current_user.admin? or bindings[:controller].current_user == bindings[:object]
         end
       end
     end
