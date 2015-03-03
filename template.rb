@@ -237,7 +237,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
     edit do
       field :email, :string do
         visible do
-          bindings[:controller].current_user.admin?
+          bindings[:controller].current_user.admin? or (bindings[:controller].current_user.manager? bindings[:controller].current_user == bindings[:object])
         end
       end
       field :name, :string

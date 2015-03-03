@@ -20,7 +20,7 @@ require 'rails_admin_toggleable'
 
 require 'x-real-ip'
 
-require 'glebtv-ckeditor'
+require 'ckeditor'
 
 require 'sitemap_generator'
 require 'kaminari'
