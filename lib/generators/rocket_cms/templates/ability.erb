@@ -4,7 +4,8 @@ class Ability
   def initialize(user)
     if !user.nil? and (user.admin? or user.manager?)
       can :read, :all
-      can :manage, :all
+      can :access, :rails_admin   # grant access to rails_admin
+      can :dashboard              # grant access to the dashboard
       if user.admin?
         admin_ui(user)
       elsif user.manager?
@@ -14,13 +15,10 @@ class Ability
   end
 
   def admin_ui(user)
-    can :access, :rails_admin   # grant access to rails_admin
-    can :dashboard              # grant access to the dashboard
+    can :manage, :all
   end
 
   def manager_ui(user)
-    can :access, :rails_admin   # grant access to rails_admin
-    can :dashboard              # grant access to the dashboard
     cannot :manage, Menu
     cannot [:edit, :destroy, :new, :create], User
     can :edit, user

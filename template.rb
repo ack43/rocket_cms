@@ -372,12 +372,13 @@ create_file 'app/assets/stylesheets/rails_admin/custom/theming.css.sass' do <<-T
 .input-small
   width: 150px
 
-input[type=text]
-  width: 380px !important
-input.ra-filtering-select-input[type=text]
-  width: 180px !important
-input.hasDatepicker
-  width: 180px !important
+.container-fluid
+  input[type=text]
+    width: 380px !important
+  input.ra-filtering-select-input[type=text]
+    width: 180px !important
+  input.hasDatepicker
+    width: 180px !important
 
 .sidebar-nav
   a
@@ -415,10 +416,6 @@ input.hasDatepicker
   right: 0
   left: auto
 
-.modal
-  width: 800px !important
-
-
 body.rails_admin .modal
   margin: 0 auto !important
   .modal-dialog
@@ -450,6 +447,18 @@ body.rails_admin
 .content > .alert
   margin-top: 20px
 
+.badge-important
+  background: red
+.badge-success
+  background: green
+
+.sidebar-nav i
+  margin-right: 5px
+
+body.rails_admin .table td.paperclip_type, body.rails_admin .table td.carrierwave_type,
+ img
+  max-width: 150px
+  max-height: 100px
 TEXT
 end
 
