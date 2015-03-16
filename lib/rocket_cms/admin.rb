@@ -161,5 +161,49 @@ module RocketCMS
         field :sitemap_priority
       }
     end
+
+
+
+    def embedded_image_config
+      Proc.new {
+        field :enabled, :toggle
+        field :name, :string
+        field :image
+      }
+
+    end
+
+    def gallery_config
+      Proc.new {
+        navigation_label I18n.t('rs.gallery')
+        field :enabled, :toggle
+
+        field :name, :string
+        field :slugs, :enum do
+          enum_method do
+            :slugs
+          end
+          visible do
+            bindings[:view].current_user.admin?
+          end
+          multiple do
+            true
+          end
+        end
+        field :text_slug
+
+        field :image
+      }
+    end
+
+    def image_config
+      Proc.new {
+        navigation_label I18n.t('rs.gallery')
+        field :enabled, :toggle
+        field :gallery
+        field :name, :string
+        field :image
+      }
+    end
   end
 end

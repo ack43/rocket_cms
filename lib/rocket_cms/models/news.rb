@@ -5,9 +5,9 @@ module RocketCMS
       include RocketCMS::Model
       include Seoable
       include Enableable
-      include RocketCMS.orm_specific('News')
       include ManualSlug
       include SitemapData
+      include RocketCMS.orm_specific('News')
 
       if RocketCMS.configuration.search_enabled
         include RocketCMS::ElasticSearch

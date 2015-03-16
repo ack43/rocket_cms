@@ -61,11 +61,19 @@ module RocketCMS
     autoload :News, 'rocket_cms/models/news'
     autoload :ContactMessage, 'rocket_cms/models/contact_message'
 
+    autoload :EmbeddedGalleryImage, 'rocket_cms/models/embedded_gallery_image'
+    autoload :GalleryImage,         'rocket_cms/models/gallery_image'
+    autoload :Gallery,              'rocket_cms/models/gallery'
+
     module Mongoid
       autoload :Menu, 'rocket_cms/models/mongoid/menu'
       autoload :Page, 'rocket_cms/models/mongoid/page'
       autoload :News, 'rocket_cms/models/mongoid/news'
       autoload :ContactMessage, 'rocket_cms/models/mongoid/contact_message'
+
+      autoload :EmbeddedGalleryImage, 'rocket_cms/models/mongoid/embedded_gallery_image'
+      autoload :GalleryImage,         'rocket_cms/models/mongoid/gallery_image'
+      autoload :Gallery,              'rocket_cms/models/mongoid/gallery'
     end
 
     module ActiveRecord

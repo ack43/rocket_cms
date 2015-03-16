@@ -43,6 +43,10 @@ ru:
       page: Страница
       contact_message: Сообщение
       news: Новость
+
+      gallery: Фотогалерея
+      gallery_image: Фото в фотогалерее
+      embeddede_gallery_image: Фото в фотогалерее
     attributes:
       user:
         email: E-mail
@@ -72,6 +76,10 @@ ru:
         email: Ваш е-мейл
         phone: Ваш телефон
         content: Ваше сообщение
+      gallery:
+      gallery_image:
+       gallery: Фотогалерея
+      embeddede_gallery_image:
     errors:
       models:
         contact_message:

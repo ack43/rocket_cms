@@ -78,8 +78,6 @@ group :production do
   gem "god"
 end
 
-gem "rails_admin_sort_embedded"
-
 TEXT
 end
 
@@ -96,6 +94,8 @@ create_file '.gitignore' do <<-TEXT
 /.bundle
 /log/*.log
 /tmp/*
+/public/assets
+/public/ckeditor
 TEXT
 end
 
@@ -360,6 +360,8 @@ if Rails.env.development?
     end
   end
 end
+
+Rack::Utils.multipart_part_limit = 0
 TEXT
 end
 

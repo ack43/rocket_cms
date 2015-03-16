@@ -17,7 +17,7 @@ RailsAdmin.config do |config|
   config.authorize_with :cancan
 <% if RocketCMS.mongoid? %>
   ## == MongoidAudit
-  #config.audit_with :mongoid_audit, 'HistoryTracker'
+  config.audit_with :mongoid_audit, 'HistoryTracker'
 <% elsif RocketCMS.active_record? %>
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 <% end %>
@@ -42,13 +42,14 @@ RailsAdmin.config do |config|
 
     nested_set do
       visible do
-        ['Page'].include? bindings[:abstract_model].model_name
+        ['Page', 'Gallery', 'GalleryImage'].include? bindings[:abstract_model].model_name
       end
     end
     
     custom_show_in_app do
       visible do
-        ['Page', 'News'].include? bindings[:abstract_model].model_name
+        #temporary
+        false #['Page', 'News'].include? bindings[:abstract_model].model_name
       end
     end
     
@@ -62,6 +63,7 @@ RailsAdmin.config do |config|
   config.excluded_models = [
       'RailsAdmin::CustomShowInApp', 'HistoryTracker',
       'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture',
+      'EmbeddedGalleryImage'
   ]
 end
 

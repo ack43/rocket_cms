@@ -4,12 +4,12 @@ module RocketCMS
       extend ActiveSupport::Concern
       include RocketCMS::Model
       include Enableable
-      include RocketCMS.orm_specific('Menu')
       include ManualSlug
+      include RocketCMS.orm_specific('Menu')
 
       included do
 
-        field :name, type: String, localize: true
+        field :name, type: String, localize: RocketCMS.configuration.localize
         manual_slug :name
         
         after_save do
