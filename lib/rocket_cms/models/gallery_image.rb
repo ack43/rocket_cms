@@ -8,7 +8,7 @@ module RocketCMS
 
       included do
         belongs_to :gallery
-        field :name, type: String
+        field :name, type: String, localize: RocketCMS.configuration.localize
       end
     end
   end

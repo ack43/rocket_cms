@@ -8,7 +8,7 @@ module RocketCMS
         included do
           #embedded_in :model # need to override
 
-          field :name, type: String
+          field :name, type: String, localize: RocketCMS.configuration.localize
 
           has_mongoid_attached_file :image # need to override
           validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png"] }

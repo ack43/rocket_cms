@@ -9,7 +9,7 @@ module RocketCMS
 
       included do
 
-        field :name, type: String, localize: RocketCMS.configuration.localize
+        field :name, type: String
         manual_slug :name
         
         after_save do
