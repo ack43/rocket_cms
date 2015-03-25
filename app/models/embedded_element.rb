@@ -1,6 +1,6 @@
 if RocketCMS.mongoid?
-  class EmbeddedGalleryImage < EmbeddedElement
-    include RocketCMS::Models::EmbeddedGalleryImage
+  class EmbeddedElement
+    include RocketCMS::Models::EmbeddedElement
     RocketCMS.apply_patches self
 
     # use it in inherited model

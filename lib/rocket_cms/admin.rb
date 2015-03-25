@@ -74,7 +74,8 @@ module RocketCMS
         end
         RocketCMS.only_patches self, [:show, :export]
         nested_set({
-          max_depth: RocketCMS.configuration.menu_max_depth
+          max_depth: RocketCMS.configuration.menu_max_depth,
+          scopes: []
         })
       }
     end
@@ -164,13 +165,28 @@ module RocketCMS
 
 
 
-    def embedded_image_config
+    def embedded_element_config(navigation_label = I18n.t('rs.cms'), fields = {})
       Proc.new {
+        navigation_label(navigation_label) unless navigation_label.nil?
         field :enabled, :toggle
         field :name, :string
-        field :image
+        fields.each_pair do |name, type|
+          if type.nil?
+            field name
+          else
+            field name, type
+          end
+        end
       }
+    end
 
+    def embedded_image_config
+      RocketCMS.embedded_element_config(
+          nil,
+          {
+              image: nil
+          }
+      )
     end
 
     def gallery_config

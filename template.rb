@@ -592,6 +592,11 @@ sudo /etc/init.d/god_bootup_#{app_name.downcase}
 TEXT
 end
 
+inject_into_file 'config/initializers/assets.rb', before: /\z/ do <<-TEXT
+Rails.application.config.assets.precompile += %w( ckeditor/* )
+TEXT
+end
+
 
 
 if mongoid

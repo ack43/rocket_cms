@@ -61,6 +61,8 @@ module RocketCMS
     autoload :News, 'rocket_cms/models/news'
     autoload :ContactMessage, 'rocket_cms/models/contact_message'
 
+    autoload :EmbeddedElement,      'rocket_cms/models/embedded_element'
+
     autoload :EmbeddedGalleryImage, 'rocket_cms/models/embedded_gallery_image'
     autoload :GalleryImage,         'rocket_cms/models/gallery_image'
     autoload :Gallery,              'rocket_cms/models/gallery'
@@ -70,6 +72,8 @@ module RocketCMS
       autoload :Page, 'rocket_cms/models/mongoid/page'
       autoload :News, 'rocket_cms/models/mongoid/news'
       autoload :ContactMessage, 'rocket_cms/models/mongoid/contact_message'
+
+      autoload :EmbeddedElement,      'rocket_cms/models/mongoid/embedded_element'
 
       autoload :EmbeddedGalleryImage, 'rocket_cms/models/mongoid/embedded_gallery_image'
       autoload :GalleryImage,         'rocket_cms/models/mongoid/gallery_image'
