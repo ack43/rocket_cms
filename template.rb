@@ -18,14 +18,14 @@ gem 'rails', '4.2.1'
 #{if mongoid then "gem 'mongoid', '~> 4.0.0'" else "gem 'pg'" end}
 
 # gem 'sass'
+gem 'compass'
 
 #{if mongoid then "gem 'ack_rocket_cms_mongoid'" else "gem 'ack_rocket_cms_activerecord'" end}
 
 gem 'devise'
 
-gem 'sass-rails'
-gem 'compass-rails'
-gem 'compass'
+gem 'sass-rails', '~> 5.0'
+gem 'compass-rails', '~> 2.0.4'
 
 gem 'slim-rails'
 gem 'rs_russian'

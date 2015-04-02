@@ -212,11 +212,13 @@ module RocketCMS
       }
     end
 
-    def image_config
+    def image_config(without_gallery = false)
       Proc.new {
         navigation_label I18n.t('rs.gallery')
         field :enabled, :toggle
-        field :gallery
+        unless without_gallery
+          field :gallery
+        end
         field :name, :string
         field :image
       }
