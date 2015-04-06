@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ack_rocket_cms (0.7.5.1)
+    ack_rocket_cms (0.7.5.2)
       addressable
       ckeditor
       coffee-rails
@@ -203,7 +203,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
-    simple-navigation (3.14.0)
+    simple-navigation (4.0.1)
       activesupport (>= 2.3.2)
     simple_form (3.1.0)
       actionpack (~> 4.0)

@@ -95,7 +95,7 @@ create_file '.gitignore' do <<-TEXT
 /log/*.log
 /tmp/*
 /public/assets
-/public/ckeditor
+/public/ckeditor_assets
 TEXT
 end
 

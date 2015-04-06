@@ -42,7 +42,7 @@ module RocketCMS
         time.strftime('%Y-%m-%d')
       end
       def format_date
-        time.strftime('%d.%m.%Y')
+        time.strftime(I18n.t('rs.format_time'))
       end
     end
   end

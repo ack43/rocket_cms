@@ -14,6 +14,7 @@ en:
     sitemap_data: 'Sitemap data'
     edit: Edit
     send: Send
+    format_time: "%-m/%-d/%Y"
     m:
       enabled: 'added to menu "%{menu}"'
       disabled: 'deleted from menu "%{menu}"'

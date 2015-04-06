@@ -31,7 +31,7 @@ module RocketCMS
       }
     end
     
-    def page_config
+    def page_config(fields = {})
       Proc.new {
         RocketCMS.apply_patches self
         navigation_label I18n.t('rs.cms')
@@ -68,6 +68,13 @@ module RocketCMS
               help I18n.t('rs.final_in_menu')
             end
             field :text_slug
+          end
+          fields.each_pair do |name, type|
+            if type.nil?
+              field name
+            else
+              field name, type
+            end
           end
           group :seo, &RocketCMS.seo_config
           group :sitemap_data, &RocketCMS.sitemap_data_config
@@ -108,7 +115,7 @@ module RocketCMS
       }
     end
 
-    def news_config
+    def news_config(fields = {})
       Proc.new {
         navigation_label I18n.t('rs.cms')
         list do
@@ -139,6 +146,13 @@ module RocketCMS
 
         edit do
           field :content, :ck_editor
+          fields.each_pair do |name, type|
+            if type.nil?
+              field name
+            else
+              field name, type
+            end
+          end
           RocketCMS.apply_patches self
           group :seo, &RocketCMS.seo_config
           group :sitemap_data, &RocketCMS.sitemap_data_config
@@ -180,12 +194,10 @@ module RocketCMS
       }
     end
 
-    def embedded_image_config
+    def embedded_image_config(fields = {})
       RocketCMS.embedded_element_config(
           nil,
-          {
-              image: nil
-          }
+          {image: nil}.merge(fields)
       )
     end
 
@@ -212,7 +224,7 @@ module RocketCMS
       }
     end
 
-    def image_config(without_gallery = false)
+    def image_config(without_gallery = false, fields = {})
       Proc.new {
         navigation_label I18n.t('rs.gallery')
         field :enabled, :toggle
@@ -221,6 +233,13 @@ module RocketCMS
         end
         field :name, :string
         field :image
+        fields.each_pair do |name, type|
+          if type.nil?
+            field name
+          else
+            field name, type
+          end
+        end
       }
     end
   end

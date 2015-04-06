@@ -14,6 +14,7 @@ ru:
     sitemap_data: 'Данные для карты сайта'
     edit: Редактировать
     send: Отправить
+    format_time: "%d.%m.%Y"
     m:
       enabled: 'добавлено в меню "%{menu}"'
       disabled: 'удалено из меню "%{menu}"'
