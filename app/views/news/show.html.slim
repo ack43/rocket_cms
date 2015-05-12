@@ -1,5 +1,5 @@
 .rs-news-show
-  %h1.rs-news-title= @news.name
+  h1.rs-news-title= @news.name
   .rs-news-date= l(@news.time.to_date)
   .rs-news-text= @news.excerpt
   - if !RocketCMS.configuration.news_image_styles.nil? && @news.image?

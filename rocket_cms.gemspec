@@ -5,8 +5,8 @@ require 'rocket_cms/version'
 Gem::Specification.new do |spec|
   spec.name          = 'ack_rocket_cms'
   spec.version       = RocketCMS::VERSION
-  spec.authors       = ['glebtv', 'Alexander Kiseliev']
-  spec.email         = ['glebtv@gmail.com', "i43ack@gmail.com"]
+  spec.authors       = ['Alexander Kiseliev', 'glebtv']
+  spec.email         = ["i43ack@gmail.com", 'glebtv@gmail.com']
   spec.description   = %q{RocketCMS fork}
   spec.summary       = %q{Please DO NOT use this gem directly, use ack_rocket_cms_mongoid or ack_rocket_cms_activerecord instead!}
   spec.homepage      = 'https://github.com/ack43/rocket_cms'
@@ -45,6 +45,7 @@ Gem::Specification.new do |spec|
 
 
   spec.add_dependency "rails_admin_mongoid_localize_field", "~> 0.1.2"
+  spec.add_dependency "ack_rails_admin_jcrop"
 
   spec.add_dependency 'stringex'
   spec.add_dependency 'thor'

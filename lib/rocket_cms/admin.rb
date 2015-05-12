@@ -13,6 +13,10 @@ module RocketCMS
         end
         field :lat
         field :lon
+
+        if block_given?
+          yield
+        end
       }
     end
     
@@ -28,6 +32,10 @@ module RocketCMS
 
         field :og_title, :string
         field :og_image
+
+        if block_given?
+          yield
+        end
       }
     end
     
@@ -73,7 +81,11 @@ module RocketCMS
             if type.nil?
               field name
             else
-              field name, type
+              if type.is_a?(Array)
+                field name, type[0], &type[1]
+              else
+                field name, type
+              end
             end
           end
           group :seo, &RocketCMS.seo_config
@@ -84,18 +96,26 @@ module RocketCMS
           max_depth: RocketCMS.configuration.menu_max_depth,
           scopes: []
         })
+
+        if block_given?
+          yield
+        end
       }
     end
     
     def menu_config
       Proc.new {
-          navigation_label 'CMS'
+        navigation_label 'CMS'
 
-          field :enabled, :toggle
-          field :text_slug
-          field :name
-          RocketCMS.apply_patches self
-          RocketCMS.only_patches self, [:show, :list, :edit, :export]
+        field :enabled, :toggle
+        field :text_slug
+        field :name
+        RocketCMS.apply_patches self
+        RocketCMS.only_patches self, [:show, :list, :edit, :export]
+
+        if block_given?
+          yield
+        end
       }
     end
     
@@ -112,6 +132,10 @@ module RocketCMS
 
         RocketCMS.apply_patches self
         RocketCMS.only_patches self, [:show, :list, :edit, :export]
+
+        if block_given?
+          yield
+        end
       }
     end
 
@@ -126,7 +150,9 @@ module RocketCMS
         field :time
         field :name
         unless RocketCMS.configuration.news_image_styles.nil?
-          field :image
+          field :image, :jcrop do
+            jcrop_options :image_jcrop_options
+          end
         end
         field :excerpt
         field :slugs, :enum do
@@ -150,7 +176,11 @@ module RocketCMS
             if type.nil?
               field name
             else
-              field name, type
+              if type.is_a?(Array)
+                field name, type[0], &type[1]
+              else
+                field name, type
+              end
             end
           end
           RocketCMS.apply_patches self
@@ -159,6 +189,10 @@ module RocketCMS
         end
 
         RocketCMS.only_patches self, [:show, :list, :export]
+
+        if block_given?
+          yield
+        end
       }
     end
 
@@ -174,6 +208,10 @@ module RocketCMS
           end
         end
         field :sitemap_priority
+
+        if block_given?
+          yield
+        end
       }
     end
 
@@ -188,17 +226,37 @@ module RocketCMS
           if type.nil?
             field name
           else
-            field name, type
+            if type.is_a?(Array)
+              field name, type[0], &type[1]
+            else
+              field name, type
+            end
           end
+        end
+
+        if block_given?
+          yield
         end
       }
     end
 
     def embedded_image_config(fields = {})
-      RocketCMS.embedded_element_config(
+      jcrop_proc = Proc.new do
+        jcrop_options :image_jcrop_options
+      end
+
+      if block_given?
+        RocketCMS.embedded_element_config(
           nil,
-          {image: nil}.merge(fields)
-      )
+          {image: [:jcrop, jcrop_proc]}.merge(fields),
+          yield
+        )
+      else
+        RocketCMS.embedded_element_config(
+          nil,
+          {image: [:jcrop, jcrop_proc]}.merge(fields)
+        )
+      end
     end
 
     def gallery_config
@@ -220,7 +278,13 @@ module RocketCMS
         end
         field :text_slug
 
-        field :image
+        field :image, :jcrop do
+          jcrop_options :image_jcrop_options
+        end
+
+        if block_given?
+          yield
+        end
       }
     end
 
@@ -232,13 +296,19 @@ module RocketCMS
           field :gallery
         end
         field :name, :string
-        field :image
+        field :image, :jcrop do
+          jcrop_options :image_jcrop_options
+        end
         fields.each_pair do |name, type|
           if type.nil?
             field name
           else
             field name, type
           end
+        end
+
+        if block_given?
+          yield
         end
       }
     end

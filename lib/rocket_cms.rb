@@ -27,6 +27,7 @@ require 'kaminari'
 require 'addressable/uri'
 require 'turbolinks'
 require 'simple-navigation'
+require 'ack_rails_admin_jcrop'
 
 require 'rocket_cms/configuration'
 require 'rocket_cms/patch'
