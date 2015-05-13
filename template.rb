@@ -209,6 +209,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
   field :roles,   type: Array, default: []
 
   before_save do
+    self.roles ||= []
     self.roles.reject! { |r| r.blank? }
   end
 
@@ -525,7 +526,8 @@ TEXT
 end
 
 remove_file 'app/assets/stylesheets/application.css'
-create_file 'app/assets/stylesheets/application.css.sass' do <<-TEXT
+remove_file 'app/assets/stylesheets/application.css.sass'
+create_file 'app/assets/stylesheets/application.sass' do <<-TEXT
 @import 'compass'
 @import 'rocket_cms'
 
@@ -545,7 +547,8 @@ TEXT
 end
 
 remove_file 'app/assets/javascripts/application.js'
-create_file 'app/assets/javascripts/application.js.coffee' do <<-TEXT
+remove_file 'app/assets/javascripts/application.js.coffee'
+create_file 'app/assets/javascripts/application.coffee' do <<-TEXT
 #= require rocket_cms
 TEXT
 end

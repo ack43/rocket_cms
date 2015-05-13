@@ -154,7 +154,7 @@ module RocketCMS
             jcrop_options :image_jcrop_options
           end
         end
-        field :excerpt
+        field :excerpt, :ck_editor
         field :slugs, :enum do
           enum_method do
             :slugs
