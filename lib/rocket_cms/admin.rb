@@ -31,7 +31,9 @@ module RocketCMS
         field :robots, :string
 
         field :og_title, :string
-        field :og_image
+        field :og_image, :jcrop do
+          jcrop_options :og_image_jcrop_options
+        end
 
         if block_given?
           yield
