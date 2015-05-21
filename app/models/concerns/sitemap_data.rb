@@ -9,6 +9,9 @@ module SitemapData
       field :sitemap_lastmod,     type: DateTime
       field :sitemap_changefreq,  type: String,   default: 'daily'
       field :sitemap_priority,    type: Float
+
+      scope :sitemap_show,  -> { where(sitemap_show: true) }
+      scope :for_sitemap,   -> { sitemap_show }
     elsif RocketCMS.active_record?
     end
   end

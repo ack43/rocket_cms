@@ -16,9 +16,6 @@ module RocketCMS
 
           scope :sorted, -> { order_by([:lft, :asc]) }
           scope :menu, ->(menu_id) { enabled.sorted.where(menu_ids: menu_id) }
-
-          scope :in_sitemap,    -> { where(sitemap_show: true) }
-          scope :sitemap_show,  -> { in_sitemap }
         end
       end
     end
