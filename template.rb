@@ -52,6 +52,9 @@ group :development do
   gem 'hipchat'
   # gem 'coffee-rails-source-maps'
   # gem 'compass-rails-source-maps'
+
+  gem 'favicon_maker', '0.3'
+  gem 'favicon_maker_rails'
 end
 
 group :test do
@@ -468,6 +471,7 @@ end
 remove_file 'public/robots.txt'
 create_file 'public/robots.txt' do <<-TEXT
 User-Agent: *
+Allow: /
 Disallow: /admin
 Sitemap: /sitemap.xml.gz
 TEXT
