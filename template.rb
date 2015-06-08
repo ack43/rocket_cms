@@ -221,11 +221,11 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
 
   AVAILABLE_ROLES.each do |r|
     class_eval <<-EVAL
-      def #{r}?
-        self.roles and self.roles.include?("#{r}")
+      def \#{r}?
+        self.roles and self.roles.include?("\#{r}")
       end
 
-      scope :#{r.pluralize}, -> { any_in(roles: "#{r}") }
+      scope :\#{r.pluralize}, -> { any_in(roles: "\#{r}") }
     EVAL
   end
 
