@@ -4,11 +4,11 @@ module RocketCMS
       module Page
         extend ActiveSupport::Concern
         included do
-          field :regexp, type: String
-          field :redirect, type: String
-          field :excerpt, type: String, localize: RocketCMS.configuration.localize
-          field :content, type: String, localize: RocketCMS.configuration.localize
-          field :fullpath, type: String
+          field :regexp, type: String, default: ""
+          field :redirect, type: String, default: ""
+          field :excerpt, type: String, localize: RocketCMS.configuration.localize, default: ""
+          field :content, type: String, localize: RocketCMS.configuration.localize, default: ""
+          field :fullpath, type: String, default: ""
           has_and_belongs_to_many :menus, inverse_of: :pages
           acts_as_nested_set
 

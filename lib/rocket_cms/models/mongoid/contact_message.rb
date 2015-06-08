@@ -4,10 +4,10 @@ module RocketCMS
       module ContactMessage
         extend ActiveSupport::Concern
         included do
-          field :name, type: String
-          field :email, type: String
-          field :phone, type: String
-          field :content, type: String
+          field :name, type: String, default: ""
+          field :email, type: String, default: ""
+          field :phone, type: String, default: ""
+          field :content, type: String, default: ""
           RocketCMS.configuration.contacts_fields.each_pair do |fn, ft|
             next if ft.nil?
             field fn, type: ft

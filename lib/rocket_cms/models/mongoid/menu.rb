@@ -4,7 +4,7 @@ module RocketCMS
       module Menu
         extend ActiveSupport::Concern
         included do
-          field :name, type: String
+          field :name, type: String, default: ""
         end
       end
     end

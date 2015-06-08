@@ -371,7 +371,7 @@ Rack::Utils.multipart_part_limit = 0
 TEXT
 end
 
-create_file 'app/assets/stylesheets/rails_admin/custom/theming.css.sass' do <<-TEXT
+create_file 'app/assets/stylesheets/rails_admin/custom/theming.sass' do <<-TEXT
 .navbar-brand
   margin-left: 0 !important
 
@@ -461,7 +461,7 @@ body.rails_admin
 .sidebar-nav i
   margin-right: 5px
 
-body.rails_admin .table td.paperclip_type, body.rails_admin .table td.carrierwave_type
+body.rails_admin .table td.paperclip_type, body.rails_admin .table td.carrierwave_type, body.rails_admin .table td.jcrop_type
   img
     max-width: 150px
     max-height: 100px

@@ -33,6 +33,10 @@ module Seoable
   def self.admin
     RocketCMS.seo_config
   end
+
+  def og_image_jcrop_options
+    {aspectRation: 800.0/600.0}
+  end
   
   # deprecated
   def self.seo_config

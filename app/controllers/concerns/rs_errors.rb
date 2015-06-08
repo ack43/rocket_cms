@@ -17,6 +17,16 @@ module RsErrors
 
     if defined?(CanCan)
       rescue_from CanCan::AccessDenied do |exception|
+        Rails.logger.error "__________________________"
+        Rails.logger.error "Error 403"
+        Rails.logger.error (params ? params.inspect : "no params data")
+        Rails.logger.error (current_user ? current_user.inspect : "no current_user")
+        unless exception.nil?
+          Rails.logger.error exception.message
+          Rails.logger.error exception.backtrace.join("\n")
+          capture_exception(exception) if defined?(Raven)
+        end
+        Rails.logger.error "__________________________"
         if !user_signed_in?
           #scope = rails_admin? ? main_app : self
           #redirect_to scope.new_user_session_path, alert: "Необходимо авторизоваться"
@@ -30,20 +40,30 @@ module RsErrors
 
   protected
   def render_404(exception = nil)
-    Rails.logger.error "404: #{request.url}"
+    Rails.logger.error "__________________________"
+    Rails.logger.error "Error 404"
+    Rails.logger.error (params ? params.inspect : "no params data")
+    Rails.logger.error (current_user ? current_user.inspect : "no current_user")
     unless exception.nil?
       Rails.logger.error exception.message
       Rails.logger.error exception.backtrace.join("\n")
       capture_exception(exception) if defined?(Raven)
     end
+    Rails.logger.error "__________________________"
     render_error(404)
   end
 
-  def render_500(exception)
-    Rails.logger.error "500: #{request.url}"
-    Rails.logger.error exception.message
-    Rails.logger.error exception.backtrace.join("\n")
-    capture_exception(exception) if defined?(Raven)
+  def render_500(exception = nil)
+    Rails.logger.error "__________________________"
+    Rails.logger.error "Error 500"
+    Rails.logger.error (params ? params.inspect : "no params data")
+    Rails.logger.error (current_user ? current_user.inspect : "no current_user")
+    unless exception.nil?
+      Rails.logger.error exception.message
+      Rails.logger.error exception.backtrace.join("\n")
+      capture_exception(exception) if defined?(Raven)
+    end
+    Rails.logger.error "__________________________"
     begin
       if rails_admin_controller?
         render text: 'Внутренняя ошибка', status: 500
@@ -55,7 +75,7 @@ module RsErrors
   end
 
   def render_error(code = 500)
-    render template: "errors/error_#{code}", formats: [:html], handlers: [:haml, :slim], layout: RocketCMS.configuration.error_layout, status: code
+      render template: "errors/error_#{code}", formats: [:html], handlers: [:haml, :slim], layout: RocketCMS.configuration.error_layout, status: code
   end
 
   def rails_admin?
