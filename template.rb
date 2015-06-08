@@ -43,7 +43,8 @@ group :development do
   gem 'pry-rails'
   gem 'spring'
 
-  gem 'capistrano', require: false
+  gem 'capistrano', '~> 3.4.0', require: false
+
   gem 'rvm1-capistrano3', require: false
   gem 'glebtv-capistrano-unicorn', require: false
   gem 'capistrano-bundler', require: false
@@ -61,7 +62,7 @@ group :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'email_spec'
-  #{if mongoid then "gem 'glebtv-mongoid-rspec'" else "" end}
+  #{if mongoid then "gem 'mongoid-rspec'" else "" end}
   gem 'ffaker'
   gem 'factory_girl_rails'
 end

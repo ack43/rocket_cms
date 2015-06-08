@@ -32,8 +32,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin'
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
+
   spec.add_dependency 'ckeditor'
-  spec.add_dependency 'rails_admin_settings', '~> 0.9.0'
+  spec.add_dependency 'rails_admin_settings'
+
   spec.add_dependency 'geocoder'
   spec.add_dependency 'simple-navigation'
   spec.add_dependency 'sitemap_generator'
@@ -49,7 +51,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'stringex'
   spec.add_dependency 'thor'
-
   spec.add_dependency 'smart_excerpt'
 end
 

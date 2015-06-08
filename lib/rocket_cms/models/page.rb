@@ -15,13 +15,13 @@ module RocketCMS
       end
         
       included do
-
-        before_validation do
-          self.fullpath = "/pages/#{slug}" if self.fullpath.blank?
-        end
+        has_and_belongs_to_many :menus, inverse_of: :pages
         validates_uniqueness_of :fullpath
         validates_presence_of :name
         manual_slug :name
+        before_validation do
+          self.fullpath = "/pages/#{slug}" if self.fullpath.blank?
+        end
       end
 
       def get_fullpath

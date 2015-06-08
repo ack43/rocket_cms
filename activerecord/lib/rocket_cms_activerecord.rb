@@ -2,7 +2,6 @@ require 'awesome_nested_set'
 require 'paperclip'
 require 'paper_trail'
 require 'friendly_id'
-require 'foreigner'
 require 'validates_lengths_from_database'
 require 'pg_search'
 
@@ -13,4 +12,3 @@ module RocketCMS
 end
 
 require 'rocket_cms'
-

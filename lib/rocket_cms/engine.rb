@@ -10,14 +10,13 @@ module RocketCMS
       #temp
       begin
         if Settings.table_exists?
-          Settings.default_email_from(default: 'noreply@gpk-holding.ru')
-          Settings.form_email(default: 'admin@gpk-holding.ru')
+          Settings.default_email_from(default: 'noreply@site.domain')
+          Settings.form_email(default: 'admin@site.domain')
           Settings.email_topic(default: 'с сайта')
         end
       rescue
       end
     end
-
     initializer 'rocket_cms.paperclip' do
       require 'paperclip/style'
       module ::Paperclip
@@ -33,6 +32,13 @@ module RocketCMS
     config.after_initialize do
       # trigger autoload so models are registered in Mongoid::Elasticearch
       RocketCMS.configuration.search_models.map(&:constantize)
+
+      # Write default email settings to DB so they can be changed.
+      if Settings.table_exists?
+        Settings.default_email_from(default: 'noreply@rscx.ru')
+        Settings.form_email(default: 'glebtv@ya.ru')
+        Settings.email_topic(default: 'с сайта')
+      end
     end
   end
 end

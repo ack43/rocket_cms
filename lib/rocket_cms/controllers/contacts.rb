@@ -28,7 +28,7 @@ module RocketCMS
             redirect_after_done
           end
         else
-          render_error
+          render_contacts_error
         end
       end
 
@@ -36,7 +36,7 @@ module RocketCMS
       end
 
       private
-      def render_error
+      def render_contacts_error
         if request.xhr? && process_ajax
           render json: {errors: @contact_message.errors}, status: 422
         else

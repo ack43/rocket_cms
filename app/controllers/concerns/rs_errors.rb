@@ -5,6 +5,7 @@ module RsErrors
       rescue_from Exception, with: :render_500
       rescue_from ActionController::RoutingError, with: :render_404
       rescue_from ActionController::UnknownController, with: :render_404
+      rescue_from ActionController::MissingFile, with: :render_404
       rescue_from AbstractController::ActionNotFound, with: :render_404
       if RocketCMS.mongoid?
         rescue_from Mongoid::Errors::DocumentNotFound, with: :render_404
@@ -32,9 +33,13 @@ module RsErrors
           #redirect_to scope.new_user_session_path, alert: "Необходимо авторизоваться"
           authenticate_user!
         else
-          redirect_to '/', alert: "Доступ запрещен"
+          redirect_to '/', alert: t('rs.errors.access_denied')
         end
       end
+    end
+
+    rescue_from ActionController::InvalidAuthenticityToken do |exception|
+      redirect_to '/', alert: t('rs.errors.form_expired')
     end
   end
 
@@ -65,8 +70,8 @@ module RsErrors
     end
     Rails.logger.error "__________________________"
     begin
-      if rails_admin_controller?
-        render text: 'Внутренняя ошибка', status: 500
+      if rails_admin?
+        render text: t('rs.errors.internal_error'), status: 500
         return
       end
     rescue
@@ -79,6 +84,6 @@ module RsErrors
   end
 
   def rails_admin?
-    self.is_a?(RailsAdmin::ApplicationController)
+    self.is_a?(RailsAdmin::ApplicationController) || self.is_a?(RailsAdmin::MainController)
   end
 end
