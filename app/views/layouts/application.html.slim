@@ -6,7 +6,7 @@ html lang="ru"
     title= page_title
     = yield :meta
     = csrf_meta_tags
-    = favicon_link_tag '/favicon.ico'
+    = render partial: "blocks/favicon"
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
     /[if lt IE 9]
@@ -21,4 +21,3 @@ html lang="ru"
       #root_footer
     #footer
       = render 'blocks/footer'
-

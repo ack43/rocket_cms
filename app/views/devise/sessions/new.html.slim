@@ -1,0 +1,23 @@
+main
+  h2 Вход на сайт
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .field
+      = f.label :email, "E-mail"
+      br
+      = f.email_field :email, autofocus: true, title: "E-mail"
+    br
+    .field
+      = f.label :password, "Пароль"
+      br
+      = f.password_field :password, autocomplete: "off", title: "Пароль"
+    br
+      - if devise_mapping.rememberable?
+        .field
+          = f.check_box :remember_me, title: "Запомнить меня"
+          = f.label :remember_me, "Запомнить меня"
+
+    .actions
+      = f.submit "Войти"
+    br
+
+  = render "devise/shared/links"

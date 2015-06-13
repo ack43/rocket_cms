@@ -481,33 +481,7 @@ end
 
 remove_file 'app/views/layouts/application.html.erb'
 
-remove_file 'app/views/blocks/_favicon.html.slim'
-create_file 'app/views/blocks/_favicon.html.slim' do <<-TEXT
-/ For third-generation iPad with high-resolution Retina display:
-/ Size should be 228 x 228 pixels
-= favicon_link_tag '/apple-touch-icon-228x228-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '228x228'
-/ For iPhone with high-resolution Retina display:
-/ Size should be 114 x 114 pixels
-= favicon_link_tag '/apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
-/ For first- and second-generation iPad:
-/ Size should be 72 x 72 pixels
-= favicon_link_tag '/apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
-/ For non-Retina iPhone, iPod Touch, and Android 2.1+ devices:
-/ Size should be 57 x 57 pixels
-= favicon_link_tag '/apple-touch-icon-57x57-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '57x57'
-/ For non-Retina iPhone, iPod Touch, and Android 2.1+ devices:
-/ Size should be 57 x 57 pixels
-= favicon_link_tag '/apple-touch-icon.png', :rel => 'apple-touch-icon', :type => 'image/png'
-/ For all other devices
-/ Size should be 32 x 32 pixels
-= favicon_link_tag '/favicon.ico', :rel => 'shortcut icon', :type => 'image/vnd.microsoft.icon'
-/ For all other devices
-/ Size should be 32 x 32 pixels
-= favicon_link_tag '/favicon.png', :rel => 'shortcut icon', :type => 'image/png'
-TEXT
-end
-
-gsub_file 'app/views/layouts/application.html.slim', "= favicon_link_tag '/favicon.ico'", '= render partial: "blocks/favicon"'
+gsub_file 'app/views/layouts/application.html.slim', "= favicon_link_tag '/favicon.ico'", "= render partial: 'blocks/favicon' #= favicon_link_tag '/favicon.ico'"
 
 
 remove_file 'config/application.rb'
