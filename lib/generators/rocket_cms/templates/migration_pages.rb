@@ -1,7 +1,12 @@
 class RocketCmsCreatePages < ActiveRecord::Migration
   def change
     create_table :menus do |t|
-      t.string :name, null: false
+
+      if RocketCMS.config.localize
+        t.column :name_translations, 'hstore'
+      else
+        t.string :name, null: false
+      end
       t.string :slug, null: false
       t.timestamps
     end
@@ -14,14 +19,18 @@ class RocketCmsCreatePages < ActiveRecord::Migration
       t.integer :rgt
       t.integer :depth 
 
-      t.string :slug, null: false
-      t.attachment :image
+      if RocketCMS.config.localize
+        t.column :name_translations, 'hstore', default: {}
+        t.column :content_translations, 'hstore', default: {}
+      else
+        t.string :name, null: false
+        t.text :content
+      end
 
+      t.string :slug, null: false
       t.string :regexp
       t.string :redirect
-      t.text :content
       t.string :fullpath, null: false
-      RocketCMS::Migration.seo_fields(t)
       t.timestamps
     end
     add_index :pages, :slug, unique: true

@@ -1,46 +1,35 @@
 module Seoable
   extend ActiveSupport::Concern
-  if RocketCMS.mongoid?
-    include ::Mongoid::Paperclip
-  end
-  
-  included do
-    if RocketCMS.mongoid?
-      field :name, type: String, localize: RocketCMS.configuration.localize
-      field :h1, type: String, localize: RocketCMS.configuration.localize
+  LOCALIZED_FIELDS = [:h1, :title, :keywords, :description, :og_title]
+  FIELDS = LOCALIZED_FIELDS + [:og_image, :robots]
 
-      field :title, type: String, localize: RocketCMS.configuration.localize
-      field :keywords, type: String, localize: RocketCMS.configuration.localize
-      field :description, type: String, localize: RocketCMS.configuration.localize
-      field :robots, type: String, localize: RocketCMS.configuration.localize
-
-      field :og_title, type: String, localize: RocketCMS.configuration.localize
-      has_mongoid_attached_file :og_image, styles: {thumb: "800x600>"}
-    elsif RocketCMS.active_record?
-      has_attached_file :og_image, styles: {thumb: "800x600>"}
+  if Seo.separate_table?
+    included do
+      has_one :seo, as: :seoable, autosave: true
+      accepts_nested_attributes_for :seo
+      delegate *FIELDS, to: :seo
+      delegate *(FIELDS.map {|f| "#{f}=".to_sym }), to: :seo
+      alias seo_without_build seo
+      def seo
+        seo_without_build || build_seo
+      end
+      if RocketCMS.config.localize
+        delegate *(LOCALIZED_FIELDS.map {|f| "#{f}_translations".to_sym }), to: :seo
+        delegate *(LOCALIZED_FIELDS.map {|f| "#{f}_translations=".to_sym }), to: :seo
+      end
     end
-    validates_attachment_content_type :og_image, content_type: %w(image/gif image/jpeg image/jpg image/png), if: :og_image?
+    include RocketCMS::SeoHelpers
+  else
+    include RocketCMS::Models::Seo
   end
 
-  def page_title
-    title.blank? ? name : title
-  end
 
-  def get_og_title
-    og_title.blank? ? name : og_title
-  end
-  
   def self.admin
     RocketCMS.seo_config
   end
 
   def og_image_jcrop_options
     {aspectRation: 800.0/600.0}
-  end
-  
-  # deprecated
-  def self.seo_config
-    RocketCMS.seo_config
   end
 end
 

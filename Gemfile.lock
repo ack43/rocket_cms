@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ack_rocket_cms (0.7.7.1)
+    ack_rocket_cms (0.8.0)
       ack_rails_admin_jcrop
       addressable
       ckeditor

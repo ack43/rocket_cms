@@ -4,6 +4,7 @@ module RsMenu
     helper_method :navigation
   end
 
+  private
   def render_with_subs(items, primary, item)
     subs = items.select { |i| i.parent_id == item.id && !i.name.blank? && i.enabled }
     if subs.empty?
@@ -18,7 +19,7 @@ module RsMenu
   end
   
   def navigation_item(primary, item, block=nil)
-    url = item.redirect.blank? ? item.fullpath : item.redirect
+    url = nav_get_url(item)
     if block.nil?
       primary.item(item.slug, item.name, url, item.nav_options)
     else
@@ -31,7 +32,7 @@ module RsMenu
       SimpleNavigation.config.autogenerate_item_ids = false
       begin
         nav_extra_data_before(type, primary)
-        items = ::Menu.find(type.to_s).pages.enabled.sorted.to_a
+        items = nav_get_menu_items(type)
         items.select { |i| i.parent_id.nil? && !i.name.blank? && i.enabled }.each do |item|
           render_with_subs(items, primary, item) if primary
         end
@@ -45,6 +46,12 @@ module RsMenu
     end
   end
 
+  def nav_get_url(item)
+    item.redirect.blank? ? item.fullpath : item.redirect
+  end
+  def nav_get_menu_items(type)
+    ::Menu.find(type.to_s).pages.enabled.sorted.to_a
+  end
   def nav_extra_data_before(type, primary)
     # override for additional config or items
   end

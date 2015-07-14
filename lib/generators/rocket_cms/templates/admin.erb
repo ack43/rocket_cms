@@ -54,8 +54,16 @@ RailsAdmin.config do |config|
     end
     
     toggle
+<<<<<<< HEAD
     toggle_menu
     sitemap
+=======
+    toggle_menu do
+      visible do
+        ['Page'].include? bindings[:abstract_model].model_name
+      end
+    end
+>>>>>>> upstream/master
   end
 
   config.main_app_name = ['<%= Rails.application.class.name.split('::')[0] %>', 'Админка']

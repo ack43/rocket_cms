@@ -3,19 +3,21 @@ module RocketCMS
     extend self
 
     def seo_fields(t)
-      t.string :name, null: false
-      t.string :h1
-      t.string :title
-      t.text :keywords
-      t.text :description
+      if RocketCMS.config.localize
+        t.column :h1_translations, 'hstore', default: {}
+        t.column :title_translations, 'hstore', default: {}
+        t.column :keywords_translations, 'hstore', default: {}
+        t.column :description_translations, 'hstore', default: {}
+        t.column :og_title_translations, 'hstore', default: {}
+      else
+        t.string :h1
+        t.string :title
+        t.text :keywords
+        t.text :description
+        t.string :og_title
+      end
       t.string :robots
-      t.string :og_title
       t.attachment :og_image
-
-      #if RocketCMS.localize
-        #t.column :name_translations, 'hstore'
-        #t.column :name_translations, 'hstore'
-      #end
     end
 
     def map_fields(t)
@@ -29,3 +31,4 @@ module RocketCMS
     end
   end
 end
+

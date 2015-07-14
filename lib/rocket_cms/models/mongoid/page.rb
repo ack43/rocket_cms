@@ -6,9 +6,10 @@ module RocketCMS
         included do
           field :regexp, type: String, default: ""
           field :redirect, type: String, default: ""
-          field :excerpt, type: String, localize: RocketCMS.configuration.localize, default: ""
-          field :content, type: String, localize: RocketCMS.configuration.localize, default: ""
+          field :excerpt, type: String, localize: RocketCMS.config.localize, default: ""
+          field :content, type: String, localize: RocketCMS.config.localize, default: ""
           field :fullpath, type: String, default: ""
+
           has_and_belongs_to_many :menus, inverse_of: :pages
           acts_as_nested_set
 

@@ -23,6 +23,16 @@ ru:
     errors:
       title: "Ошибка %{code}"
       form_expired: "Истекло время на заполение формы"
-      internal_error: "Внутренняя ошибка"
+      internal_error: "Внутренняя ошибка: %{klass} %{message}"
       access_denied: "Доступ запрещен"
       not_found: 'Запрашиваемая страница была удалена, или введён некорректный адрес'
+
+
+  shared:
+    enter_site: Войти на сайт
+    email: E-mail
+    password: Пароль
+    remember_me: Запомнить меня
+    enter: Войти
+    registration: Зарегистрироваться
+    forget_password: Забыли пароль?

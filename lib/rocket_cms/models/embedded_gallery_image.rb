@@ -6,6 +6,10 @@ module RocketCMS
       include Enableable
       include Sortable
       include RocketCMS.orm_specific('EmbeddedGalleryImage')
+
+      included do
+        validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/, if: :image?
+      end
     end
   end
 end

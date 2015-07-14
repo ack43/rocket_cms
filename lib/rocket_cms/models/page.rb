@@ -10,7 +10,7 @@ module RocketCMS
 
       include RocketCMS.orm_specific('Page')
 
-      if RocketCMS.configuration.search_enabled
+      if RocketCMS.config.search_enabled
         include RocketCMS::ElasticSearch
       end
         
@@ -54,10 +54,14 @@ module RocketCMS
           url.match(clean_regexp)
         end
       end
-      
+
+      def regexp_prefix
+        ""
+      end
+
       def clean_regexp
         if regexp.blank?
-          /^#{Regexp.escape(fullpath)}$/
+          /^#{regexp_prefix}#{Regexp.escape(fullpath)}$/
         else
           begin
             /#{regexp}/

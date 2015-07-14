@@ -43,7 +43,7 @@ module RsErrors
     end
   end
 
-  protected
+  private
   def render_404(exception = nil)
     Rails.logger.error "__________________________"
     Rails.logger.error "Error 404"
@@ -71,16 +71,20 @@ module RsErrors
     Rails.logger.error "__________________________"
     begin
       if rails_admin?
-        render text: t('rs.errors.internal_error'), status: 500
+        render text: t('rs.errors.internal_error', klass: exception.class.name, message: exception.message), status: 500
         return
       end
-    rescue
+    rescue Exception => e
+      puts "error while rendering rails admin exception"
+      puts e.class.name
+      puts e.message
+      puts e.backtrace.join("\n")
     end
     render_error(500)
   end
 
   def render_error(code = 500)
-      render template: "errors/error_#{code}", formats: [:html], handlers: [:haml, :slim], layout: RocketCMS.configuration.error_layout, status: code
+    render template: "errors/error_#{code}", formats: [:html], handlers: [:haml, :slim], layout: RocketCMS.config.error_layout, status: code
   end
 
   def rails_admin?

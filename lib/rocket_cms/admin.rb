@@ -20,10 +20,20 @@ module RocketCMS
       }
     end
     
-    def seo_config(is_active = false)
+    def seo_config(is_active = true)
       Proc.new {
-        active is_active
-        label "SEO"
+        if respond_to?(:active)
+          active is_active
+          label "SEO"
+        else
+          visible false
+        end
+        RocketCMS.seo_fields(self)
+      }
+    end
+
+    def seo_fields(s)
+      s.instance_eval do
         field :h1, :string
         field :title, :string
         field :keywords, :text
@@ -31,6 +41,7 @@ module RocketCMS
         field :robots, :string
 
         field :og_title, :string
+
         field :og_image, :jcrop do
           jcrop_options :og_image_jcrop_options
         end
@@ -38,7 +49,7 @@ module RocketCMS
         if block_given?
           yield
         end
-      }
+      end
     end
     
     def page_config(fields = {})
@@ -90,12 +101,21 @@ module RocketCMS
               end
             end
           end
-          group :seo, &RocketCMS.seo_config
+          if Seo.separate_table?
+            group :seo do
+              active true
+              field :seo do
+                active true
+              end
+            end
+          else
+            group :seo, &RocketCMS.seo_config(true)
+          end
           group :sitemap_data, &RocketCMS.sitemap_data_config
         end
         RocketCMS.only_patches self, [:show, :export]
         nested_set({
-          max_depth: RocketCMS.configuration.menu_max_depth,
+          max_depth: RocketCMS.config.menu_max_depth,
           scopes: []
         })
 
@@ -149,9 +169,11 @@ module RocketCMS
         end
 
         field :enabled, :toggle
-        field :time
+        field :time do
+          sort_reverse true
+        end
         field :name
-        unless RocketCMS.configuration.news_image_styles.nil?
+        unless RocketCMS.config.news_image_styles.nil?
           field :image, :jcrop do
             jcrop_options :image_jcrop_options
           end
@@ -171,6 +193,11 @@ module RocketCMS
         field :text_slug
 
         RocketCMS.apply_patches self
+
+        list do
+          RocketCMS.apply_patches self
+          sort_by :time
+        end
 
         edit do
           field :content, :ck_editor

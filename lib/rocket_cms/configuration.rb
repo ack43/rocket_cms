@@ -14,6 +14,7 @@ module RocketCMS
     attr_accessor :news_image_styles
     attr_accessor :news_per_page
     attr_accessor :news_excerpt
+    attr_accessor :news_content_required
 
     attr_accessor :error_layout
     attr_accessor :menu_max_depth
@@ -27,6 +28,8 @@ module RocketCMS
     attr_accessor :contacts_message_required
     attr_accessor :contacts_captcha_error_message
 
+    attr_accessor :separate_seo_table
+
     attr_accessor :localize
 
     attr_accessor :recreate_contact_message_action
@@ -38,6 +41,7 @@ module RocketCMS
       }
       @news_per_page = 10
       @news_excerpt = 12
+      @news_content_required = true
 
       @error_layout = 'application'
       @menu_max_depth = 2
@@ -54,6 +58,8 @@ module RocketCMS
       @recreate_contact_message_action = "new"
 
       @localize = false
+
+      @separate_seo_table = false
     end
 
     def search_enabled=(val)

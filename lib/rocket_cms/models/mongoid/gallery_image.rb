@@ -10,7 +10,6 @@ module RocketCMS
           scope :sorted, -> { order_by([:lft, :asc]) }
 
           has_mongoid_attached_file :image # need to override
-          validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png"] }
 
           def image_file_name=(val)
             return self[:image_file_name] = ""  if val == ""

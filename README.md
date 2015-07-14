@@ -1,13 +1,10 @@
 # RocketCMS
 
-rails_admin + mongoid/activerecord + elasticsearch CMS
+Rails + RailsAdmin + Mongoid/PostgreSQL + Elasticsearch CMS
 
 Very opinionated and tuned for my needs.
 
-Sorry, no documentation or examples are availiable yet. Stay tuned
-
-**Before 1.0 API and class names should be considered unstable and can change at
-any time!**
+**Before 1.0 API and class names should be considered unstable and can change at any time!**
 
 ## Installation
 
@@ -57,6 +54,68 @@ for ActiveRecord:
     rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/ack43/rocket_cms/master/template.rb
 
 generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
+
+### Localization
+
+All models included in the gem support localization via either [hstore_translate](https://github.com/Leadformance/hstore_translate) or built-in Mongoid localize: true option.
+
+You can get a nice admin UI for editing locales by adding [rails_admin_hstore_translate](https://github.com/glebtv/rails_admin_hstore_translate) or [rails_admin_mongoid_localize_field](https://github.com/sudosu/rails_admin_mongoid_localize_field)
+
+Add to: ```app/models/page.rb```
+
+```ruby
+class Page < ActiveRecord::Base
+  include RocketCMS::Models::Page
+  RocketCMS.apply_patches self
+  rails_admin &RocketCMS.page_config
+
+  def regexp_prefix
+    "(?:\/ru|\/en)?"
+  end
+end
+```
+
+Wrap your routes with locale scope:
+
+```ruby
+scope "(:locale)", locale: /en|ru/ do
+  get 'contacts' => 'contacts#new', as: :contacts
+  post 'contacts' => 'contacts#create', as: :create_contacts
+end
+```
+
+Add to application_controller.rb:
+
+```ruby
+class ApplicationController < ActionController::Base
+  include RocketCMS::Controller
+  include RsLocalizeable
+end
+```
+
+Enable localization in RocketCMS:
+
+```ruby
+RocketCMS.configure do |rc|
+  rc.news_image_styles = {small: '107x126#'}
+  rc.contacts_captcha = true
+  rc.contacts_message_required = true
+  ...
+  rc.localize = true
+end
+```
+
+Add ```rails_admin_hstore_translate``` or ```hstore_translate``` gem if using PostgreSQL:
+
+```ruby
+gem 'rails_admin_hstore_translate'
+```
+
+or
+
+```ruby
+gem 'hstore_translate'
+```
 
 ### Documentation
 

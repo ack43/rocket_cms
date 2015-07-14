@@ -29,6 +29,7 @@ require 'turbolinks'
 require 'simple-navigation'
 require 'ack_rails_admin_jcrop'
 
+require 'rocket_cms/seo_helpers'
 require 'rocket_cms/configuration'
 require 'rocket_cms/patch'
 require 'rocket_cms/admin'
@@ -57,6 +58,7 @@ module RocketCMS
   autoload :Migration, 'rocket_cms/migration'
 
   module Models
+    autoload :Seo,  'rocket_cms/models/seo'
     autoload :Menu, 'rocket_cms/models/menu'
     autoload :Page, 'rocket_cms/models/page'
     autoload :News, 'rocket_cms/models/news'
@@ -69,6 +71,7 @@ module RocketCMS
     autoload :Gallery,              'rocket_cms/models/gallery'
 
     module Mongoid
+      autoload :Seo,  'rocket_cms/models/mongoid/seo'
       autoload :Menu, 'rocket_cms/models/mongoid/menu'
       autoload :Page, 'rocket_cms/models/mongoid/page'
       autoload :News, 'rocket_cms/models/mongoid/news'
@@ -82,6 +85,7 @@ module RocketCMS
     end
 
     module ActiveRecord
+      autoload :Seo,  'rocket_cms/models/active_record/seo'
       autoload :Menu, 'rocket_cms/models/active_record/menu'
       autoload :Page, 'rocket_cms/models/active_record/page'
       autoload :News, 'rocket_cms/models/active_record/news'

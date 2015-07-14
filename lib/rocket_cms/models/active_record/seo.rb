@@ -1,17 +1,17 @@
 module RocketCMS
   module Models
     module ActiveRecord
-      module Menu
+      module Seo
         extend ActiveSupport::Concern
         included do
-          has_paper_trail
-          validates_lengths_from_database
+          has_attached_file :og_image, styles: {thumb: "800x600>"}
           if RocketCMS.config.localize
-            translates :name
+            translates :h1, :title, :keywords, :description, :og_title
           end
         end
       end
     end
   end
 end
+
 

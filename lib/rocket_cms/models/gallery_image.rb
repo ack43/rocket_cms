@@ -9,6 +9,8 @@ module RocketCMS
       included do
         belongs_to :gallery
         field :name, type: String, localize: RocketCMS.configuration.localize
+
+        validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/, if: :image?
       end
     end
   end

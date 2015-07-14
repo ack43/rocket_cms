@@ -3,7 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 
-if Gem::Version.new(version) < Gem::Version.new('4.2.1')
+if Gem::Version.new(version) < Gem::Version.new('4.2.3')
   puts "You are using an old version of Rails (#{version})"
   puts "Please update"
   puts "Stopping"
@@ -14,13 +14,13 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.3'
 #{if mongoid then "gem 'mongoid', '~> 4.0.0'" else "gem 'pg'" end}
 
 # gem 'sass'
 gem 'compass'
 
-#{if mongoid then "gem 'ack_rocket_cms_mongoid'" else "gem 'ack_rocket_cms_activerecord'" end}
+#{if mongoid then "gem 'ack_rocket_cms_mongoid'" else "gem 'ack_rocket_cms_activerecord'" end}, '~> 0.8.0'
 
 gem 'devise'
 
@@ -418,10 +418,7 @@ create_file 'app/assets/stylesheets/rails_admin/custom/theming.sass' do <<-TEXT
     font-size: 20px
 
 .remove_nested_fields
-  display: block !important
-  z-index: 5
-  right: 0
-  left: auto
+  opacity: 1 !important
 
 body.rails_admin .modal
   margin: 0 auto !important

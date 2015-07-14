@@ -5,7 +5,6 @@ module RsPages
   end
 
   private
-
   def find_page
     return if rails_admin?
     @seo_page = find_seo_page request.path
@@ -23,8 +22,16 @@ module RsPages
       path = path[0..-2]
       do_redirect = true
     end
-
     page = Page.enabled.where(fullpath: path).first
+
+    if page.nil? && !params[:slug].blank?
+      page = Page.enabled.where(fullpath: "/" + params[:slug]).first
+    end
+
+    if page.nil?
+      page = find_seo_extra(path)
+    end
+
     if page.nil?
       do_redirect = true
       spath = path.chomp(File.extname(path))
@@ -32,13 +39,13 @@ module RsPages
         page = Page.enabled.where(fullpath: spath).first
       end
     end
+
     if !page.nil? && do_redirect
       redirect_to path, status: :moved_permanently
     end
 
     page
   end
-
 
   def find_seo_page_with_redirect(path)
     do_redirect = false
@@ -64,6 +71,10 @@ module RsPages
 
     page
 
+  end
+  
+  def find_seo_extra(path)
+    nil
   end
 
   def rails_admin?
