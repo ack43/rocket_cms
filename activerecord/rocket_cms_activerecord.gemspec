@@ -8,9 +8,9 @@ require 'rocket_cms/version'
 Gem::Specification.new do |spec|
   spec.name          = 'ack_rocket_cms_activerecord'
   spec.version       = RocketCMS::VERSION
-  spec.authors       = ['glebtv', 'Alexander Kiseliev']
-  spec.email         = ['glebtv@gmail.com', "i43ack@gmail.com"]
-  spec.description   = %q{RocketCMS fork - ActiveRecord metapackage}
+  spec.authors       = ['Alexander Kiseliev', 'glebtv']
+  spec.email         = ["i43ack@gmail.com", 'glebtv@gmail.com']
+  spec.description   = %q{AckRocketCMS - RocketCMS fork - ActiveRecord metapackage}
   spec.summary       = %q{}
   spec.homepage      = 'https://github.com/ack43/rocket_cms'
   spec.license       = 'MIT'
@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.executables   = []
   spec.test_files    = []
   spec.require_paths = ['lib']
-  
+
   spec.add_dependency 'ack_rocket_cms', RocketCMS::VERSION
   spec.add_dependency 'awesome_nested_set'
   spec.add_dependency 'paperclip'
@@ -32,4 +32,3 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
 end
-

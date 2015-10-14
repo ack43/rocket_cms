@@ -9,9 +9,9 @@ require 'rocket_cms/version'
 Gem::Specification.new do |spec|
   spec.name          = 'ack_rocket_cms_mongoid'
   spec.version       = RocketCMS::VERSION
-  spec.authors       = ['glebtv', 'Alexander Kiseliev']
-  spec.email         = ['glebtv@gmail.com', "i43ack@gmail.com"]
-  spec.description   = %q{RocketCMS fork - Mongoid metapackage}
+  spec.authors       = ['Alexander Kiseliev', 'glebtv']
+  spec.email         = ["i43ack@gmail.com", 'glebtv@gmail.com']
+  spec.description   = %q{AckRocketCMS - RocketCMS fork - Mongoid metapackage}
   spec.summary       = %q{}
   spec.homepage      = 'https://github.com/ack43/rocket_cms'
   spec.license       = 'MIT'
@@ -36,4 +36,3 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mongo_session_store-rails4'
   spec.add_dependency 'rails_admin_settings', '~> 0.9.0'
 end
-
