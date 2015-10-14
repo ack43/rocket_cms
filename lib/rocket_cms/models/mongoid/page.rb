@@ -17,6 +17,13 @@ module RocketCMS
 
           scope :sorted, -> { order_by([:lft, :asc]) }
           scope :menu, ->(menu_id) { enabled.sorted.where(menu_ids: menu_id) }
+
+          def page_h1
+            _ret = h1
+            _ret = name   if _ret.blank?
+            _ret = title  if _ret.blank?
+            _ret
+          end
         end
       end
     end

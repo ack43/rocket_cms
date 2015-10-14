@@ -19,7 +19,7 @@ module RocketCMS
         end
       }
     end
-    
+
     def seo_config(is_active = true)
       Proc.new {
         if respond_to?(:active)
@@ -51,7 +51,7 @@ module RocketCMS
         end
       end
     end
-    
+
     def page_config(fields = {})
       Proc.new {
         RocketCMS.apply_patches self
@@ -124,7 +124,7 @@ module RocketCMS
         end
       }
     end
-    
+
     def menu_config
       Proc.new {
         navigation_label 'CMS'
@@ -140,11 +140,11 @@ module RocketCMS
         end
       }
     end
-    
+
     def contact_message_config
       Proc.new {
         navigation_label I18n.t('rs.settings')
-        field :created_at do
+        field :c_at do
           read_only true
         end
         field :name
@@ -152,12 +152,21 @@ module RocketCMS
         field :email
         field :phone
 
-        RocketCMS.apply_patches self
-        RocketCMS.only_patches self, [:show, :list, :edit, :export]
+        RocketCMS.config.contacts_fields.each_pair do |fn, ft|
+          next if ft.nil?
+          if ft.is_a?(Array)
+            field fn, ft[1].to_sym
+          else
+            field fn
+          end
+        end
 
         if block_given?
           yield
         end
+
+        RocketCMS.apply_patches self
+        RocketCMS.only_patches self, [:show, :list, :edit, :export]
       }
     end
 

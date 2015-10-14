@@ -17,7 +17,7 @@ module RsMenu
     cr = item.clean_regexp
     navigation_item(primary, item, block)
   end
-  
+
   def navigation_item(primary, item, block=nil)
     url = nav_get_url(item)
     if block.nil?
@@ -32,10 +32,10 @@ module RsMenu
       SimpleNavigation.config.autogenerate_item_ids = false
       begin
         nav_extra_data_before(type, primary)
-        items = nav_get_menu_items(type)
-        items = items.select { |i| i.parent_id.nil? && !i.name.blank? && i.enabled }
+        all_items = nav_get_menu_items(type)
+        items = all_items.select { |i| i.parent_id.nil? && !i.name.blank? && i.enabled }
         items.each do |item|
-          render_with_subs(items, primary, item)
+          render_with_subs(all_items, primary, item)
         end
         nav_extra_data_after(type, primary)
       rescue Exception => exception
@@ -62,4 +62,3 @@ module RsMenu
     # override for additional config or items
   end
 end
-
