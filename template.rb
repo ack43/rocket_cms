@@ -57,7 +57,7 @@ group :development do
   gem 'favicon_maker', '0.3'
   gem 'favicon_maker_rails'
 
-  gem 'rails_email_preview', '~> 0.2.29'
+  gem 'ail_preview', '~> 0.2.29'
 end
 
 group :test do
@@ -106,17 +106,6 @@ TEXT
 end
 
 create_file 'extra/.gitkeep', ''
-
-generate 'rails_email_preview:install'
-remove_file 'app/mailer_previews/contact_mailer_preview.rb'
-create_file 'app/mailer_previews/contact_mailer_preview.rb' do <<-TEXT
-class ContactMailerPreview
-  def new_message_email
-    ContactMailer.new_message_email(ContactMessage.all.to_a.sample)
-  end
-end
-TEXT
-end
 
 if mongoid
 remove_file 'config/initializers/embedded_findable.rb'
@@ -223,6 +212,17 @@ create_file '.ruby-version', "2.2.3\n"
 create_file '.ruby-gemset', "#{app_name}\n"
 
 run 'bundle install --without production'
+
+generate 'rails_email_preview:install'
+remove_file 'app/mailer_previews/contact_mailer_preview.rb'
+create_file 'app/mailer_previews/contact_mailer_preview.rb' do <<-TEXT
+class ContactMailerPreview
+  def new_message_email
+    ContactMailer.new_message_email(ContactMessage.all.to_a.sample)
+  end
+end
+TEXT
+end
 
 
 if mongoid
