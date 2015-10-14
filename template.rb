@@ -57,7 +57,7 @@ group :development do
   gem 'favicon_maker', '0.3'
   gem 'favicon_maker_rails'
 
-  gem 'ail_preview', '~> 0.2.29'
+  gem 'rails_email_preview', '~> 0.2.29'
 end
 
 group :test do
