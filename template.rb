@@ -155,7 +155,7 @@ module Mongoid
 
         while relation_parts.length > 0
           item = if parent.is_a?(Mongoid::Criteria) || parent.is_a?(Array)
-                   parent.where("#{relation_parts.join('.')}._id" => id).first
+                   parent.where("\#{relation_parts.join('.')}._id" => id).first
                  else
                    parent
                  end
