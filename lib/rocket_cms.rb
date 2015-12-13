@@ -1,5 +1,5 @@
 unless defined?(RocketCMS) && RocketCMS.respond_to?(:orm) && [:active_record, :mongoid].include?(RocketCMS.orm)
-  puts "please use rocket_cms_mongoid or rocket_cms_activerecord and not rocket_cms directly"
+  puts "please use ack_rocket_cms_mongoid or ack_rocket_cms_activerecord and not ack_rocket_cms directly"
   exit 1
 end
 
@@ -57,6 +57,10 @@ module RocketCMS
 
   autoload :Migration, 'rocket_cms/migration'
 
+  # module Mongoid
+  #   autoload :Paperclip  'rocket_cms/mongoid/paperlcip'
+  # end
+
   module Models
     autoload :Seo,  'rocket_cms/models/seo'
     autoload :Menu, 'rocket_cms/models/menu'
@@ -102,4 +106,3 @@ module RocketCMS
 end
 
 require 'manual_slug'
-

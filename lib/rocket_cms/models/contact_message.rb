@@ -18,8 +18,17 @@ module RocketCMS
             errors.add(:email, I18n.t('rs.no_contact_info'))
           end
         end
+
         after_create do
-          ContactMailer.new_message_email(self).deliver
+          mailer_class.send(mailer_method, self).deliver
+        end
+
+        def mailer_class
+          ContactMailer
+        end
+
+        def mailer_method
+          :new_message_email
         end
       end
     end

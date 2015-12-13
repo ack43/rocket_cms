@@ -229,7 +229,7 @@ module RocketCMS
         RocketCMS.only_patches self, [:show, :list, :export]
 
         if block_given?
-          yield
+          yield(self)
         end
       }
     end

@@ -4,12 +4,13 @@ module RocketCMS::Controller
     include RsErrors
     include RsPages
     include RsMenu
+    include RsFancybox
     protect_from_forgery with: :exception
     helper_method :page_title
   end
 
   protected
-  
+
     def page_title
       if @seo_page.nil?
         Settings ? Settings.default_title : "" #temp

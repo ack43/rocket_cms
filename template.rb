@@ -3,7 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 
-if Gem::Version.new(version) < Gem::Version.new('4.2.3')
+if Gem::Version.new(version) < Gem::Version.new('4.2.4')
   puts "You are using an old version of Rails (#{version})"
   puts "Please update"
   puts "Stopping"
@@ -213,7 +213,7 @@ create_file '.ruby-gemset', "#{app_name}\n"
 
 run 'bundle install --without production'
 
-generate 'rails_email_preview:install'
+# generate 'rails_email_preview:install'
 remove_file 'app/mailer_previews/contact_mailer_preview.rb'
 create_file 'app/mailer_previews/contact_mailer_preview.rb' do <<-TEXT
 class ContactMailerPreview
@@ -632,6 +632,131 @@ TEXT
 end
 
 
+#god+unicorn
+remove_file 'config/unicorn.rb'
+create_file 'config/unicorn.rb' do <<-TEXT
+worker_processes 2
+working_directory "/home/ack/www/#{app_name.downcase}"
+
+# This loads the application in the master process before forking
+# worker processes
+# Read more about it here:
+# http://unicorn.bogomips.org/Unicorn/Configurator.html
+preload_app true
+
+timeout 30
+
+# This is where we specify the socket.
+# We will point the upstream Nginx module to this socket later on
+listen "/home/ack/www/#{app_name.downcase}/tmp/sockets/unicorn.sock", :backlog => 64
+
+pid "/home/ack/www/qiwi_middleware/tmp/pids/unicorn.pid"
+
+# Set the path of the log files inside the log folder of the testapp
+stderr_path "/home/ack/www/#{app_name.downcase}/log/unicorn.stderr.log"
+stdout_path "/home/ack/www/#{app_name.downcase}/log/unicorn.stdout.log"
+
+
+before_fork do |server, worker|
+  server.logger.info("worker=#{worker.nr} spawning in #{Dir.pwd}")
+
+  # graceful shutdown.
+  old_pid_file = "/home/ack/www/#{app_name.downcase}/tmp/pids/unicorn.pid.oldbin"
+  if File.exists?(old_pid_file) && server.pid != old_pid_file
+    begin
+      old_pid = File.read(old_pid_file).to_i
+      server.logger.info("sending QUIT to #{old_pid}")
+      # we're killing old unicorn master right there
+      Process.kill("QUIT", old_pid)
+    rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
+    end
+  end
+end
+
+## no need for noSQL
+# before_fork do |server, worker|
+# # This option works in together with preload_app true setting
+# # What is does is prevent the master process from holding
+# # the database connection
+#   defined?(ActiveRecord::Base) and
+#       ActiveRecord::Base.connection.disconnect!
+# end
+#
+# after_fork do |server, worker|
+# # Here we are establishing the connection after forking worker
+# # processes
+#   defined?(ActiveRecord::Base) and
+#       ActiveRecord::Base.establish_connection
+# end
+TEXT
+end
+
+remove_file 'config/unicorn.god'
+create_file 'config/unicorn.god' do <<-TEXT
+# http://unicorn.bogomips.org/SIGNALS.html
+
+rails_env = ENV['RAILS_ENV'] || 'production'
+rails_root = ENV['RAILS_ROOT'] || File.dirname(File.dirname(__FILE__))
+
+God.watch do |w|
+  w.name = "unicorn_qiwi_middleware"
+  w.interval = 30.seconds # default
+
+  # unicorn needs to be run from the rails root
+  w.start = "cd #{rails_root} && unicorn -c #{rails_root}/config/unicorn.rb -E #{rails_env} -D"
+
+  # QUIT gracefully shuts down workers
+  w.stop = "kill -KILL `cat #{rails_root}/tmp/pids/unicorn.pid`"
+
+  # USR2 causes the master to re-create itself and spawn a new worker pool
+  w.restart = "kill -USR2 `cat #{rails_root}/tmp/pids/unicorn.pid`"# && cd #{rails_root} && unicorn -c #{rails_root}/config/unicorn.rb -E #{rails_env} -D"
+
+  w.start_grace = 10.seconds
+  w.restart_grace = 10.seconds
+  w.pid_file = "#{rails_root}/tmp/pids/unicorn.pid"
+
+  w.uid = 'ack'
+  w.gid = 'ack'
+
+  w.behavior(:clean_pid_file)
+
+  w.start_if do |start|
+    start.condition(:process_running) do |c|
+      c.interval = 5.seconds
+      c.running = false
+    end
+  end
+
+  w.restart_if do |restart|
+    restart.condition(:memory_usage) do |c|
+      c.above = 150.megabytes
+      c.times = [3, 5] # 3 out of 5 intervals
+    end
+
+    restart.condition(:cpu_usage) do |c|
+      c.above = 40.percent
+      c.times = 5
+    end
+  end
+
+  # lifecycle
+  w.lifecycle do |on|
+    on.condition(:flapping) do |c|
+      c.to_state = [:start, :restart]
+      c.times = 5
+      c.within = 5.minute
+      c.transition = :unmonitored
+      c.retry_in = 10.minutes
+      c.retry_times = 5
+      c.retry_within = 2.hours
+    end
+  end
+end
+TEXT
+end
+
+
 
 #scripts
 remove_file 'scripts/assets_precompile.sh'
@@ -667,19 +792,19 @@ kill $(cat ./tmp/pids/unicorn.pid)
 TEXT
 end
 
+remove_file 'scripts/send_usr2.sh'
+create_file 'scripts/send_usr2.sh' do <<-TEXT
+#!/bin/sh
+
+kill -USR2 $(cat ./tmp/pids/unicorn.pid)
+TEXT
+end
+
 remove_file 'scripts/send_hup.sh'
 create_file 'scripts/send_hup.sh' do <<-TEXT
 #!/bin/sh
 
-kill  -HUP $(cat ./tmp/pids/unicorn.pid)
-TEXT
-end
-
-remove_file 'scripts/start_god_rvm_wrapper.sh'
-create_file 'scripts/start_god_rvm_wrapper.sh' do <<-TEXT
-#!/bin/sh
-
-sudo /etc/init.d/god_bootup_#{app_name.downcase}
+kill -HUP $(cat ./tmp/pids/unicorn.pid)
 TEXT
 end
 
